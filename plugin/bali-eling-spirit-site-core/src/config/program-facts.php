@@ -23,15 +23,15 @@ function bes_site_core_program_facts() {
         // DATA GATE: Hybrid language is intentionally null until the source conflict is resolved.
         'ytt-50h-hybrid' => array('label'=>'50H Hybrid','route'=>'/bali-eling-spirit-50h-hybrid/'),
         'ytt-50h' => array('label'=>'50H Offline','route'=>'/bali-eling-spirit-50h/'),
-        'ytt-100h' => array('label'=>'100H Offline / Residential','route'=>'/bali-eling-spirit-100h/'),
+        'ytt-100h' => array('label'=>'100H Offline / Residential','route'=>'/bali-eling-spirit-100h/','language'=>'Bahasa Indonesia / English','duration'=>'100 Hours','price'=>'IDR 16,724K ++','cta'=>'View 100H Details'),
         'ytt-200h-hybrid' => array('label'=>'200H Hybrid','route'=>'/bali-eling-spirit-200h-hybrid/'),
         'ytt-200h' => array('label'=>'200H Offline','route'=>'/bali-eling-spirit-200h/'),
         // Existing MEC/vendor route remains the Phase F primary destination.
         'ytt-300h' => array('label'=>'300H Offline','route'=>'/program/300-hour-yoga-teacher-training/'),
         'meditation' => array('label'=>'Eling Meditation Course','route'=>'/yoga-teacher-training/eling-meditation-course/'),
-        'sound-healing' => array('label'=>'Eling Sound Healing Course','route'=>'/eling-sound-healing-course/'),
+        'sound-healing' => array('label'=>'Eling Sound Healing Course','route'=>'/eling-sound-healing-course/','price'=>'IDR 3,499K','tax_behavior'=>'12.5% government tax','cta'=>'Daftar Course'),
         'pasraman' => array('label'=>'Pasraman','route'=>'/pasraman/'),
-        'pelukatan' => array('label'=>'Pelukatan / 7 Chakra Water Purification','route'=>'/7-chakra-purification/'),
+        'pelukatan' => array('label'=>'Pelukatan / 7 Chakra Water Purification','route'=>'/7-chakra-purification/','duration'=>'3 Hours','schedule'=>'Purnama & Tilem','price'=>'IDR 150K','tax_behavior'=>'12.5% government tax','cta'=>'Kenali Pengalamannya'),
     );
 
     $facts = array();

@@ -14,10 +14,10 @@ States: `WPBOX_ONLY` → `PLUGIN_SHADOW` → `PLUGIN_LIVE` → `WPBOX_OFF`. The 
 | Global Assets | `src/global/global-assets-fallback.php` → existing `src/global/global-assets.php` | `PLUGIN_SHADOW` | Existing Global Assets implementation stays byte-identical; the shadow wrapper only corrects fallback hierarchy/routes. Operational owner cutover remains UAT work. |
 | Homepage | `src/homepage/homepage.php` | `PLUGIN_LIVE` | Approved card catalog, FAQ delta, canonical routes, footer delta. |
 | Sanctuary | `src/sanctuary/*` | `PLUGIN_LIVE` | Four-category hub + approved related renderers. |
-| Academy | `src/academy/*` | `PLUGIN_LIVE` | YTT catalog, Meditation, 100H gated surface, Sound Healing gated surface. |
-| Pasraman | `src/pasraman/pasraman.php` | `PLUGIN_LIVE` | Four approved supplied programs; Program Komunitas deferred. |
-| Phase F compatibility | `src/integration/phase-f-routes.php` | `PLUGIN_LIVE` | Keeps homepage/footer shortcode/action aliases without output-level route rewriting. |
-| Site structure provisioner | `src/provisioning/site-structure.php` | bootstrap | Schema 3; shortcode-before-mutation gate, safe completion marker, code-only stale-version run, Menu 48 sync. |
+| Academy | `src/academy/*` | `PLUGIN_LIVE` | YTT catalog, Meditation, production-ready 100H surface, and production-ready Sound Healing surface; enrollment/contact destinations remain gated where not supplied. |
+| Pasraman | `src/pasraman/pasraman.php` | `PLUGIN_LIVE` | Four approved supplied programs populated from direct DOCX inspection; Program Komunitas deferred. |
+| Phase F compatibility | `src/integration/phase-f-routes.php` | `PLUGIN_LIVE` | Keeps homepage/footer shortcode/action aliases and canonicalizes historical route literals to the shared facts contract. |
+| Site structure provisioner | `src/provisioning/site-structure.php` | bootstrap | Schema 4; shortcode-before-mutation gate, EXISTS vs READY separation, safe completion marker, code-only stale-version run, READY-only Menu 48 sync. |
 
 ## Canonical Menu 48 contract
 
@@ -37,7 +37,7 @@ Partnership
 Wisdom
 ```
 
-Menu ID `48` remains authoritative. Academy remains structural; no `/academy/` page is provisioned merely for navigation. Global Assets fallback wrapper mirrors this hierarchy only when Menu 48 is empty.
+Menu ID `48` remains authoritative. Academy remains structural; no `/academy/` page is provisioned merely for navigation. For compatibility with the legacy renderer, the structural parent uses the verified Homepage `/#academy` anchor while retaining `bes-menu-structural-parent`. Global Assets fallback mirrors the same hierarchy only when Menu 48 is empty.
 
 ## Canonical route decisions
 
@@ -61,7 +61,7 @@ Menu ID `48` remains authoritative. Academy remains structural; no `/academy/` p
 - Contact channels remain route-specific; no global WhatsApp normalization.
 - Corporate contact remains gated unless an approved source identifies ownership.
 - Program Komunitas remains deferred.
-- 100H, Sound Healing, and Pasraman descriptive additions remain source-gated where approved copy is unavailable.
+- 100H and Sound Healing final enrollment/contact destinations remain gated because the approved DOCX supplies CTA labels but no destination URL/channel.
 
 ## Global Assets cutover boundary
 

@@ -3,7 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! defined( 'BES_SITE_CORE_STRUCTURE_VERSION' ) ) {
-    define( 'BES_SITE_CORE_STRUCTURE_VERSION', 3 );
+    define( 'BES_SITE_CORE_STRUCTURE_VERSION', 4 );
 }
 
 function bes_site_core_structure_program_path( $key, $default ) {
@@ -103,45 +103,97 @@ function bes_site_core_resolve_parent_id( $page, $resolved ) {
 }
 
 function bes_site_core_provision_pages( $shortcodes ) {
-    $out = array('pages'=>array(),'created'=>0,'migrated'=>0,'retitled'=>0,'warnings'=>array(),'errors'=>array(),'skipped'=>array());
+    $out = array(
+        'pages'=>array(),
+        'ready'=>array(),
+        'created'=>0,
+        'migrated'=>0,
+        'retitled'=>0,
+        'warnings'=>array(),
+        'errors'=>array(),
+        'skipped'=>array(),
+    );
+
     foreach ( bes_site_core_structure_pages() as $key => $page ) {
         if ( empty($shortcodes['map'][$page['shortcode']]) ) {
-            $out['warnings'][] = 'Skipped '.$page['slug'].': required shortcode ['.$page['shortcode'].'] is unavailable.';
+            $out['errors'][] = 'Skipped '.$page['slug'].': required shortcode ['.$page['shortcode'].'] is unavailable.';
             $out['skipped'][] = $key;
             continue;
         }
 
         $post = bes_site_core_find_page($page);
+
         if ( ! $post && isset($page['create']) && ! $page['create'] ) {
-            $out['warnings'][] = 'Expected existing page missing: '.$page['path'];
+            $out['errors'][] = 'Required existing page is missing: '.$page['path'];
+            $out['skipped'][] = $key;
             continue;
         }
+
         if ( ! $post ) {
             $id = wp_insert_post(array(
-                'post_type'=>'page','post_status'=>'publish','post_title'=>$page['title'],'post_name'=>$page['slug'],
-                'post_parent'=>bes_site_core_resolve_parent_id($page,$out['pages']),'post_content'=>'['.$page['shortcode'].']'
+                'post_type'=>'page',
+                'post_status'=>'publish',
+                'post_title'=>$page['title'],
+                'post_name'=>$page['slug'],
+                'post_parent'=>bes_site_core_resolve_parent_id($page,$out['pages']),
+                'post_content'=>'['.$page['shortcode'].']',
             ),true);
-            if ( is_wp_error($id) ) { $out['errors'][] = $page['slug'].': '.$id->get_error_message(); continue; }
-            $out['created']++; $out['pages'][$key]=(int)$id; continue;
+
+            if ( is_wp_error($id) ) {
+                $out['errors'][] = $page['slug'].': '.$id->get_error_message();
+                $out['skipped'][] = $key;
+                continue;
+            }
+
+            $out['created']++;
+            $out['pages'][$key]=(int)$id;
+            $out['ready'][$key]=(int)$id;
+            continue;
         }
 
         $out['pages'][$key]=(int)$post->ID;
-        $update = array('ID'=>$post->ID); $needs_update=false; $content_changed=false; $title_changed=false;
-        if ( ! empty($page['migrate']) && trim((string)$post->post_content) !== '['.$page['shortcode'].']' ) {
-            $update['post_content']='['.$page['shortcode'].']'; $needs_update=true; $content_changed=true;
-        } elseif ( empty($page['migrate']) && ! has_shortcode((string)$post->post_content,$page['shortcode']) ) {
-            $out['warnings'][] = 'Existing page needs shortcode review: '.$page['path'];
+
+        if ( empty($page['migrate']) ) {
+            if ( has_shortcode((string)$post->post_content,$page['shortcode']) ) {
+                $out['ready'][$key]=(int)$post->ID;
+            } else {
+                $out['errors'][] = 'Existing managed page is not ready: '.$page['path'].' does not contain ['.$page['shortcode'].'].';
+                $out['skipped'][] = $key;
+            }
+            continue;
+        }
+
+        $update=array('ID'=>$post->ID);
+        $needs_update=false;
+        $content_changed=false;
+        $title_changed=false;
+
+        if ( trim((string)$post->post_content) !== '['.$page['shortcode'].']' ) {
+            $update['post_content']='['.$page['shortcode'].']';
+            $needs_update=true;
+            $content_changed=true;
         }
         if ( ! empty($page['migrate_title']) && (string)$post->post_title !== $page['title'] ) {
-            $update['post_title']=$page['title']; $needs_update=true; $title_changed=true;
+            $update['post_title']=$page['title'];
+            $needs_update=true;
+            $title_changed=true;
         }
+
         if ( $needs_update ) {
-            $updated = wp_update_post($update,true);
-            if ( is_wp_error($updated) ) { $out['errors'][] = $page['slug'].': '.$updated->get_error_message(); continue; }
+            $updated=wp_update_post($update,true);
+            if ( is_wp_error($updated) ) {
+                $out['errors'][] = $page['slug'].': '.$updated->get_error_message();
+                $out['skipped'][] = $key;
+                continue;
+            }
             if ( $content_changed ) $out['migrated']++;
             if ( $title_changed ) $out['retitled']++;
         }
+
+        // Explicit migration pages become menu-ready only after their migration succeeds.
+        $out['ready'][$key]=(int)$post->ID;
     }
+
     return $out;
 }
 
@@ -160,7 +212,7 @@ function bes_site_core_find_menu_item( $items, $item, $page_ids, $url ) {
     return null;
 }
 
-function bes_site_core_sync_menu_48( $page_ids ) {
+function bes_site_core_sync_menu_48( $page_ids, $existing_page_ids = array() ) {
     $out = array('status'=>'not-run','created'=>0,'updated'=>0,'deduplicated'=>0,'warnings'=>array(),'errors'=>array());
     $menu = wp_get_nav_menu_object(48);
     if ( ! $menu ) { $out['status']='missing-menu'; $out['errors'][]='Menu ID 48 was not found.'; return $out; }
@@ -171,9 +223,21 @@ function bes_site_core_sync_menu_48( $page_ids ) {
             $out['errors'][]='Skipped '.$spec['title'].': parent menu item '.$spec['parent'].' is unavailable.'; $position++; continue;
         }
         if ( ! empty($spec['page']) && empty($page_ids[$spec['page']]) ) {
-            $out['errors'][]='Skipped '.$spec['title'].': managed page target '.$spec['page'].' is unavailable.'; $position++; continue;
+            // A prior provisioning run may already have exposed this managed item.
+            // Remove only that managed target when its page is no longer READY.
+            $existing_url = ! empty($existing_page_ids[$spec['page']]) ? get_permalink($existing_page_ids[$spec['page']]) : '';
+            $stale = bes_site_core_find_menu_item($items,$spec,$existing_page_ids,$existing_url);
+            if ( $stale ) {
+                $deleted = wp_delete_post($stale->ID,true);
+                if ( $deleted ) $out['deduplicated']++;
+                else $out['warnings'][]='Could not suppress unready menu item: '.$spec['title'];
+                $items=wp_get_nav_menu_items(48,array('post_status'=>'any')); if(!is_array($items))$items=array();
+            }
+            $out['errors'][]='Skipped '.$spec['title'].': managed page target '.$spec['page'].' is not READY.';
+            $position++;
+            continue;
         }
-        $url = ! empty($spec['structural']) ? '' : bes_site_core_page_url_from_contract($spec,$page_ids);
+        $url = ! empty($spec['structural']) ? home_url('/#academy') : bes_site_core_page_url_from_contract($spec,$page_ids);
         if ( empty($spec['structural']) && '' === $url ) {
             $out['errors'][]='Skipped '.$spec['title'].': destination could not be resolved.'; $position++; continue;
         }
@@ -182,7 +246,7 @@ function bes_site_core_sync_menu_48( $page_ids ) {
         $args=array('menu-item-title'=>$spec['title'],'menu-item-status'=>'publish','menu-item-parent-id'=>$parent,'menu-item-position'=>$position);
         $position++;
         if ( ! empty($spec['structural']) ) {
-            $args += array('menu-item-type'=>'custom','menu-item-url'=>'','menu-item-classes'=>'bes-menu-structural-parent');
+            $args += array('menu-item-type'=>'custom','menu-item-url'=>home_url('/#academy'),'menu-item-classes'=>'bes-menu-structural-parent');
         } elseif ( ! empty($spec['page']) ) {
             $args += array('menu-item-type'=>'post_type','menu-item-object'=>'page','menu-item-object-id'=>$page_ids[$spec['page']]);
         } else {
@@ -229,7 +293,7 @@ function bes_site_core_provision_structure( $source='manual' ) {
     if($result['contract_errors']){ $result['applied']=false; update_option('bes_site_core_structure_status',$result,false); return $result; }
     $result['shortcodes']=bes_site_core_validate_structure_shortcodes();
     $result['pages']=bes_site_core_provision_pages($result['shortcodes']);
-    $result['menu']=bes_site_core_sync_menu_48($result['pages']['pages']);
+    $result['menu']=bes_site_core_sync_menu_48($result['pages']['ready'],$result['pages']['pages']);
     if($result['pages']['created'])flush_rewrite_rules(false);
     $result['applied']=bes_site_core_structure_is_applied($result);
     update_option('bes_site_core_structure_status',$result,false); update_option('bes_site_core_structure_notice_pending',1,false);

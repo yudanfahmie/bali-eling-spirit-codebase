@@ -15,7 +15,7 @@ function bes_site_core_global_fallback_menu_specs() {
         array('key'=>'retreats','title'=>'Retreats','url'=>bes_site_core_program_route('retreats','/eling-sanctuary-retreat/'),'parent'=>'sanctuary'),
         array('key'=>'tapa-brata','title'=>'Tapa Brata','url'=>bes_site_core_program_route('tapa-brata','/eling-tapa-brata/'),'parent'=>'sanctuary'),
         array('key'=>'corporate-service','title'=>'Corporate Service','url'=>bes_site_core_program_route('corporate-service','/corporate-services/'),'parent'=>'sanctuary'),
-        array('key'=>'academy','title'=>'Academy','url'=>''),
+        array('key'=>'academy','title'=>'Academy','url'=>'/#academy'),
         array('key'=>'ytt','title'=>'Yoga Teacher Training','url'=>bes_site_core_program_route('ytt','/yoga-teacher-training/'),'parent'=>'academy'),
         array('key'=>'meditation','title'=>'Eling Meditation Course','url'=>bes_site_core_program_route('meditation','/yoga-teacher-training/eling-meditation-course/'),'parent'=>'academy'),
         array('key'=>'sound-healing','title'=>'Eling Sound Healing Course','url'=>bes_site_core_program_route('sound-healing','/eling-sound-healing-course/'),'parent'=>'academy'),
