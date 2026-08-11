@@ -95,4 +95,9 @@ return array(
         'file'         => 'academy/sound-healing-course.php',
         'legacy_owner' => 'NEW — no canonical WPCodeBox Eling Sound Healing Course owner',
     ),
+    'pasraman' => array(
+        'state'        => 'PLUGIN_SHADOW',
+        'file'         => 'pasraman/pasraman.php',
+        'legacy_owner' => 'ADAPT — existing /pasraman/ is raw WordPress content with no canonical shortcode owner',
+    ),
 );
