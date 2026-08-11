@@ -13,15 +13,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Syntax check PHP
+
+      - name: Read plugin version
+        id: meta
+        shell: bash
         run: |
-          php -l plugins/bali-eling-spirit-audit-engine/bali-eling-spirit-audit-engine.php
-          php -l plugins/bali-eling-spirit-audit-engine/includes/class-bes-audit-engine.php
-      - name: Build installable ZIP
+          VERSION="$(sed -n 's/^[[:space:]]*\*[[:space:]]*Version:[[:space:]]*//p' plugins/bali-eling-spirit-audit-engine/bali-eling-spirit-audit-engine.php | head -n 1 | tr -d '\r')"
+          test -n "$VERSION"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Syntax check PHP
+        shell: bash
+        run: |
+          find plugins/bali-eling-spirit-audit-engine -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Syntax check JavaScript
+        run: node --check plugins/bali-eling-spirit-audit-engine/assets/admin.js
+
+      - name: Build and verify installable ZIP
         run: bash scripts/build-audit-plugin.sh
+
       - name: Upload plugin artifact
         uses: actions/upload-artifact@v4
         with:
-          name: bali-eling-spirit-audit-engine-v0.1.0
-          path: dist/bali-eling-spirit-audit-engine-v0.1.0.zip
+          name: bali-eling-spirit-audit-engine-v${{ steps.meta.outputs.version }}
+          path: dist/bali-eling-spirit-audit-engine-v${{ steps.meta.outputs.version }}.zip
           if-no-files-found: error
