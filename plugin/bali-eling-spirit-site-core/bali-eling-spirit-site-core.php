@@ -16,6 +16,13 @@ if ( ! defined( 'BES_SITE_CORE_DIR' ) ) {
     define( 'BES_SITE_CORE_DIR', plugin_dir_path( __FILE__ ) );
 }
 
+if ( ! defined( 'BES_SITE_CORE_FILE' ) ) {
+    define( 'BES_SITE_CORE_FILE', __FILE__ );
+}
+
 require_once BES_SITE_CORE_DIR . 'src/loader.php';
 
 bes_site_core_load_modules();
+
+require_once BES_SITE_CORE_DIR . 'src/provisioning/site-structure.php';
+bes_site_core_register_structure_provisioning();
