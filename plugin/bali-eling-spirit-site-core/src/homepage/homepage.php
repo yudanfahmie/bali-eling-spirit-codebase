@@ -9,10 +9,12 @@ require_once __DIR__ . '/homepage-v2.php';
 
 function bes_site_core_batch_b_sanctuary_cards() {
     return array(
+        // TARGET ROUTE — NOT LIVE YET. Kept shadow-only for the approved target IA.
         array('img_id'=>3337,'img_file'=>'ceEcf-scaled.webp','img'=>content_url('uploads/2026/07/ceEcf-scaled.webp'),'alt'=>'Healing and therapy ritual at Bali Eling Spirit','eyebrow'=>'01','title'=>'Healing &amp; Therapy','subtitle'=>'','link'=>'/healing-therapy/','delay'=>'0.1s'),
         array('img_id'=>3336,'img_file'=>'anVqu.webp','img'=>content_url('uploads/2026/07/anVqu.webp'),'alt'=>'Retreat experience in sacred water at Bali Eling Spirit','eyebrow'=>'02','title'=>'Retreats','subtitle'=>'','link'=>'/eling-sanctuary-retreat/','delay'=>'0.2s'),
         array('img_id'=>3338,'img_file'=>'JjnJV.webp','img'=>content_url('uploads/2026/07/JjnJV.webp'),'alt'=>'Tapa Brata Indonesian program meditation group at Bali Eling Spirit','eyebrow'=>'03','title'=>'Tapa Brata','subtitle'=>'Program Bahasa Indonesia','link'=>'/program-bahasa-indonesia/','delay'=>'0.3s'),
         // No new approved Media Library mapping exists for Corporate Service in Batch B.
+        // TARGET ROUTE — NOT LIVE YET. Kept shadow-only for the approved target IA.
         array('img_id'=>3337,'img_file'=>'ceEcf-scaled.webp','img'=>content_url('uploads/2026/07/ceEcf-scaled.webp'),'alt'=>'Corporate wellness experience at Bali Eling Spirit','eyebrow'=>'04','title'=>'Corporate Service','subtitle'=>'','link'=>'/corporate-services/','delay'=>'0.4s'),
     );
 }
@@ -21,6 +23,7 @@ function bes_site_core_batch_b_academy_cards() {
     return array(
         array('img_id'=>3333,'img_file'=>'SYQLV.webp','img'=>content_url('uploads/2026/07/SYQLV.webp'),'alt'=>'Yoga Teacher Training practice at Bali Eling Spirit Academy','eyebrow'=>'01','title'=>'Yoga Teacher Training','subtitle'=>'','link'=>'/yoga-teacher-training/','delay'=>'0.1s'),
         array('img_id'=>3332,'img_file'=>'reNKZ.webp','img'=>content_url('uploads/2026/07/reNKZ.webp'),'alt'=>'Eling Meditation Course at Bali Eling Spirit Academy','eyebrow'=>'02','title'=>'Eling Meditation Course','subtitle'=>'','link'=>'/meditation-course/','delay'=>'0.2s'),
+        // TARGET ROUTE — NOT LIVE YET. Kept shadow-only for the approved target IA.
         array('img_id'=>3350,'img_file'=>'CYxia.webp','img'=>content_url('uploads/2026/07/CYxia.webp'),'alt'=>'Eling Sound Healing Course at Bali Eling Spirit Academy','eyebrow'=>'03','title'=>'Eling Sound Healing Course','subtitle'=>'','link'=>'/eling-sound-healing-course/','delay'=>'0.3s'),
     );
 }
@@ -33,10 +36,10 @@ function bes_site_core_batch_b_faqs() {
         array('q'=>'Pakaian apa yang sebaiknya dikenakan saat berkunjung?','a'=>'Kami menyarankan pakaian yang nyaman dan sopan, mudah bergerak untuk sesi yoga/meditasi, serta membawa pakaian ganti bila mengikuti ritual air (seperti Mother Earth Purifications atau 7 Chakra Water Purification).'),
         array('q'=>'Apakah perlu melakukan reservasi sebelum datang?','a'=>'Ya, sebagian besar program memerlukan reservasi terlebih dahulu, terutama sesi personal dengan Yogi dan program retreat menginap.'),
         array('q'=>'Bagaimana cara melakukan reservasi/booking?','a'=>'Anda dapat menghubungi kami langsung melalui WhatsApp untuk memilih program, tanggal, dan melakukan konfirmasi pemesanan.'),
-        // Approved source intentionally retains this field-level data gate.
-        array('q'=>'Apakah ada kebijakan pembatalan atau reschedule?','a'=>'Pembatalan atau perubahan jadwal dapat dilakukan dengan menghubungi kami minimal [X hari] sebelum tanggal program berlangsung. Ketentuan detail akan diinformasikan saat konfirmasi booking.'),
+        // DATA GATE: cancellation/reschedule lead time is unresolved; omit until approved.
         array('q'=>'Apakah makanan yang disediakan vegetarian?','a'=>'Ya, program yang mencakup makanan (seperti retreat menginap dan pelatihan intensif) menyediakan menu vegetarian sehat.'),
-        array('q'=>'Apa itu Healing Retreat?','a'=>'Healing Retreat adalah program retreat harian selama 5 jam yang memadukan yoga, breathwork, meditasi, ritual pembersihan air, dan sound healing untuk membantu Anda menemukan kembali kedamaian dan kejernihan pikiran.'),
+        // DATA GATE: source conflicts on duration ("5 Hours" vs 08:00–14:00); no exact duration is rendered.
+        array('q'=>'Apa itu Healing Retreat?','a'=>'Healing Retreat adalah program retreat harian yang memadukan yoga, breathwork, meditasi, ritual pembersihan air, dan sound healing untuk membantu Anda menemukan kembali kedamaian dan kejernihan pikiran.'),
         array('q'=>'Apa itu Tapa Brata?','a'=>'Tapa Brata adalah program retreat 4 hari 3 malam (disampaikan dalam Bahasa Indonesia dengan jadwal tetap) yang menggabungkan meditasi, yoga, disiplin diri, dan refleksi spiritual untuk transformasi diri yang lebih dalam.'),
         array('q'=>'Apa itu Corporate Service di Bali Eling Spirit?','a'=>'Corporate Service adalah program wellness yang dirancang khusus untuk perusahaan dan karyawan, membantu tim Anda menemukan keseimbangan dan ketenangan melalui pendekatan yoga, meditasi, dan healing.'),
         array('q'=>'Apa itu Pemurnian 7 Chakra?','a'=>'Pemurnian 7 Chakra adalah ritual pembersihan energi menggunakan air suci yang disiapkan melalui ritual tradisional, mantra, dan meditasi hening. Bertujuan membersihkan energi negatif dan memulihkan keseimbangan batin.'),
@@ -95,7 +98,7 @@ function bes_site_core_batch_b_replace_next_element( $html, $tag, $marker, $repl
 
 function bes_site_core_batch_b_render_card_grid( array $cards, $variant ) {
     $academy='academy'===$variant;
-    $grid=$academy?'grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8':'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8 mb-12 md:mb-16';
+    $grid=$academy?'grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8':'grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16';
     $feedback=$academy?'988862-section-4':'988860-section-3';
     $height=$academy?'360px':'420px';
     $shadow=$academy?'shadow-xl shadow-black/50':'shadow-xl shadow-black/40';
@@ -144,7 +147,7 @@ function bes_site_core_batch_b_render_faq_section() {
                 </div>
             <?php endforeach; ?></div><?php endforeach; ?>
             </div>
-            <div class="mt-16 text-center bes-reveal" style="transition-delay:0.3s;"><p class="font-body text-bes-parchment/50 text-sm mb-6">Butuh informasi lebih lanjut? Silakan hubungi kami.</p><a href="https://wa.me/6287825989117" target="_blank" rel="noopener" class="inline-flex items-center gap-3 px-8 py-3.5 rounded-full border border-bes-leaf text-bes-forest bg-bes-leaf font-body text-[11px] uppercase tracking-[0.2em] font-bold hover:bg-transparent hover:!text-bes-leaf transition-all duration-300"><i class="fa-brands fa-whatsapp text-sm"></i> Hubungi Kami</a></div>
+            <div class="mt-16 text-center bes-reveal" style="transition-delay:0.3s;"><p class="font-body text-bes-parchment/50 text-sm mb-6">Butuh informasi lebih lanjut? Silakan hubungi kami.</p><a href="https://wa.me/6287825989117" target="_blank" rel="noopener" class="inline-flex items-center gap-3 px-8 py-3.5 rounded-full border border-bes-leaf text-bes-forest bg-bes-leaf font-body text-[11px] uppercase tracking-[0.2em] font-bold hover:bg-transparent hover:!text-bes-leaf transition-all duration-300 shadow-[0_0_20px_rgba(194,210,74,0.15)] hover:shadow-[0_0_30px_rgba(194,210,74,0.3)]"><i class="fa-brands fa-whatsapp text-sm"></i> Hubungi Kami</a></div>
         </div>
     </section><?php return ob_get_clean();
 }
@@ -168,14 +171,14 @@ function bes_site_core_batch_b_footer_links(array $items) {
 function bes_site_core_batch_b_transform_footer($baseline) {
     $old='Sebuah sanctuary spiritual wellness yang berakar pada kearifan autentik Bali, melestarikan warisan suci melalui yoga, meditasi, dan ajaran Dharma untuk menghadirkan kehidupan yang lebih sadar, seimbang, dan harmonis.';
     $new='Tempat Anda bertransformasi, menemukan jati diri, dan membangun keseimbangan hidup melalui yoga, meditasi, dan Dharma. Berakar pada kearifan spiritual Bali.';
-    $wa=(defined('BES_CONTACT')&&is_array(BES_CONTACT)&&!empty(BES_CONTACT['whatsapp']))?preg_replace('/\\D+/','',(string)BES_CONTACT['whatsapp']):'';
-    ob_start(); ?><p class="text-sm leading-relaxed text-white/40 max-w-[360px] font-body font-light"><?php echo esc_html($new); ?></p><?php if ($wa) : ?><a href="https://wa.me/<?php echo esc_attr($wa); ?>" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mt-5 text-[10.5px] font-bold uppercase tracking-[0.16em] text-bes-leaf hover:!text-bes-ivory transition-colors"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>Hubungi via WhatsApp</span></a><?php endif; ?><?php $brand=ob_get_clean();
+    ob_start(); ?><p class="text-sm leading-relaxed text-white/40 max-w-[360px] font-body font-light"><?php echo esc_html($new); ?></p><?php $brand=ob_get_clean();
     $target=bes_site_core_batch_b_replace_element($baseline,'p',$old,$brand); if (false===$target) return $baseline;
     $target=str_replace('>Menu</h3>','>Explore</h3>',$target,$count); if (1!==$count) return $baseline;
     $explore=array(
         array('label'=>'Home','href'=>'/'),array('label'=>'About Us','href'=>'/about-us/'),array('label'=>'Sanctuary','href'=>'/sanctuary/'),array('label'=>'Academy','href'=>'/#academy'),array('label'=>'Pasraman','href'=>'/pasraman/'),array('label'=>'Partnership','href'=>'/partnership/'),array('label'=>'Wisdom','href'=>'/wisdom/'),
     );
     $target=bes_site_core_batch_b_replace_next_element($target,'ul','>Explore</h3>',bes_site_core_batch_b_footer_links($explore)); if (false===$target) return $baseline;
+    // TARGET ROUTE — NOT LIVE YET: healing-therapy, corporate-services, and sound-healing remain shadow-only.
     $programs=array(
         array('label'=>'Healing & Therapy','href'=>'/healing-therapy/'),array('label'=>'Retreats','href'=>'/eling-sanctuary-retreat/'),array('label'=>'Tapa Brata','href'=>'/program-bahasa-indonesia/'),array('label'=>'Corporate Service','href'=>'/corporate-services/'),array('label'=>'Yoga Teacher Training','href'=>'/yoga-teacher-training/'),array('label'=>'Eling Meditation Course','href'=>'/meditation-course/'),array('label'=>'Eling Sound Healing Course','href'=>'/eling-sound-healing-course/'),
     );
