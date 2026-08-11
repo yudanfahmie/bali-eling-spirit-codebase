@@ -48,9 +48,20 @@ function bes_site_core_phase_f_sanctuary_faq() {
     <?php return ob_get_clean();
 }
 
+function bes_site_core_phase_f_patch_homepage_academy_cta( $html ) {
+    return preg_replace_callback(
+        '#<a\b[^>]*\bhref="/academy"[^>]*>.*?</a>#is',
+        function( $matches ) {
+            if ( false === stripos($matches[0],'Explore Academy') ) return $matches[0];
+            return str_replace('href="/academy"','href="/#academy"',$matches[0]);
+        },
+        (string)$html
+    );
+}
+
 function bes_site_core_phase_f_render_homepage( $atts=array() ) {
     if(!function_exists('bes_site_core_render_homepage_batch_b'))return '';
-    $html=bes_site_core_render_homepage_batch_b($atts);
+    $html=bes_site_core_phase_f_patch_homepage_academy_cta(bes_site_core_render_homepage_batch_b($atts));
     $old='Sebagian besar program tersedia dalam Bahasa Indonesia dan Inggris. Beberapa program tertentu, seperti Tapa Brata dan YTT versi Hybrid, disampaikan khusus dalam Bahasa Indonesia.';
     $safe='Bahasa pengantar berbeda menurut program dan intake. Silakan periksa detail program yang dipilih dan konfirmasi bahasa pengantar untuk intake tersebut sebelum melakukan pemesanan, khususnya untuk format Hybrid.';
     return bes_site_core_phase_f_canonicalize_routes(str_replace($old,$safe,$html));

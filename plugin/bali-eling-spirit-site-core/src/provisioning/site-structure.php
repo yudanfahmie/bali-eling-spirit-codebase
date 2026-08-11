@@ -153,6 +153,12 @@ function bes_site_core_provision_pages( $shortcodes ) {
 
         $out['pages'][$key]=(int)$post->ID;
 
+        if ( 'publish' !== (string)$post->post_status ) {
+            $out['errors'][] = 'Existing managed page is not ready: '.$page['path'].' has status '.$post->post_status.'; publish status is required.';
+            $out['skipped'][] = $key;
+            continue;
+        }
+
         if ( empty($page['migrate']) ) {
             if ( has_shortcode((string)$post->post_content,$page['shortcode']) ) {
                 $out['ready'][$key]=(int)$post->ID;
