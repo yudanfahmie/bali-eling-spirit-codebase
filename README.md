@@ -1,61 +1,117 @@
 # Bali Eling Spirit Codebase
 
-Engineering archive for the Bali Eling Spirit WordPress restructure and renderer migration.
+Engineering repository for the Bali Eling Spirit WordPress restructure, Canva revision, and WPCodeBox → first-party plugin migration.
 
 ## Current objective
 
-Capture the current WordPress implementation before changing the client-facing hierarchy. The site combines WordPress pages/menus, WooCommerce, an LMS, creative pages rendered by shortcodes, and renderer logic currently managed in WPCodeBox.
+Reverse-engineer the current WordPress runtime, compare it against the approved Canva/DOCX brief, then move only the required BES custom snippets from WPCodeBox into the production site-core plugin while preserving existing shortcode/route behavior.
+
+WooCommerce, MasterStudy, Elementor, and other vendor plugins remain vendor-owned. The BES plugin only becomes the version-controlled home for Bali Eling Spirit custom code that previously lived in WPCodeBox.
 
 ## Repository layout
 
 ```text
+.cpanel.yml                         # cPanel deployment contract
+CONTRIBUTING.md                     # development + cutover rules
+
+plugin/
+  bali-eling-spirit-site-core/      # ONLY production-deployable BES plugin
+    bali-eling-spirit-site-core.php # intentionally inert before cutover
+    assets/
+    src/
+    templates/
+
 plugins/
-  bali-eling-spirit-audit-engine/   # developer current-state audit plugin
+  bali-eling-spirit-audit-engine/   # developer audit tooling; not site-core payload
+
 scripts/
-  build-audit-plugin.sh             # packages an installable ZIP
+  build-audit-plugin.sh
+
 .github/workflows/
-  build-audit-plugin.yml            # syntax-check + ZIP artifact build
+  build-audit-plugin.yml
+
 docs/
-  audit-engine.md                   # audit contract + migration strategy
+  deployment.md
+  TASK-canva-revision-current-vs-expected.md
+  audit-engine.md
+  bali-eling-spirit-audit-20260811-061200/
+  old-snippet-implementation-wpcodebox/
+  CANVA - Salinan dari Web Bahasa Indonesia/
 ```
 
-## Phase 1 — Current-state audit
+> `plugin/` (singular) is the canonical production deployment surface. Existing `plugins/` content is retained for tooling/history and must not be treated as the site-core deployment directory.
 
-Install the **Bali Eling Spirit Audit Engine**, activate it, then open:
+## Deployment
 
-**Tools → BES Audit Engine**
+cPanel deploys only:
 
-The UX is intentionally simple: one primary button, an optional migration-code checkbox, and a thin progress bar. Internally the audit runs as small sequential AJAX phases instead of one long request.
+```text
+plugin/bali-eling-spirit-site-core/
+```
 
-The bundle captures:
+into the WordPress plugin folder configured by the root `.cpanel.yml`.
 
-- WordPress/runtime/theme fundamentals;
-- pages/public post types, hierarchy and templates;
-- shortcode and builder usage per content item;
-- WordPress menus and destination mapping;
-- active plugins, WooCommerce page IDs and LMS signals;
-- registered shortcode callbacks;
-- WPCodeBox `wpcb_snippets` / `wpcb_folders` data using the current table prefix;
-- a relationship map: **menu → page/content → shortcode/builder**.
+The default deployment target is:
 
-For migration work, leave **Include full page content + WPCodeBox snippet code** enabled.
+```text
+$HOME/public_html/wp-content/plugins/bali-eling-spirit-site-core/
+```
 
-### Build an installable ZIP
+If production uses another WordPress document root, change only `DEPLOYPATH` in `.cpanel.yml`. See [`docs/deployment.md`](docs/deployment.md).
+
+## Phase 1 — reverse engineering first
+
+Before runtime migration, validate:
+
+- current WordPress pages/routes and shortcode contracts;
+- exact WPCodeBox implementation file for every relevant shortcode/hook;
+- global assets/header/footer dependencies;
+- current Homepage vs Homepage v2 behavior;
+- baseline → Canva/DOCX expectation delta;
+- minimum initial migration set;
+- duplicate/load-order/contact/data risks.
+
+The site-core skeleton is intentionally inert during this phase. Do not disable WPCodeBox snippets yet.
+
+## Cutover model
+
+Each migrated runtime unit follows:
+
+```text
+WPBOX_ONLY -> PLUGIN_SHADOW -> PLUGIN_LIVE -> WPBOX_OFF
+```
+
+A module must never execute simultaneously from WPCodeBox and the site-core plugin.
+
+The intended operator flow after implementation is validated:
+
+```text
+identify exact old snippets
+→ disable only those WPCodeBox snippets
+→ deploy/install/activate site-core
+→ test revised surfaces + regressions
+→ rollback by deactivating replacement and re-enabling old snippets if required
+```
+
+## Audit Engine
+
+The separate **Bali Eling Spirit Audit Engine** captures the current WordPress implementation before migration. It exports environment, content, navigation, extension, shortcode, WPCodeBox and relationship data.
+
+Build its installable ZIP with:
 
 ```bash
 bash scripts/build-audit-plugin.sh
 ```
 
-The GitHub Actions workflow also builds the ZIP artifact automatically whenever the audit plugin changes, and can be run manually with `workflow_dispatch`.
+The audit engine and its build workflow are developer tooling and are not part of the cPanel site-core payload.
 
-> **Important:** this repository is currently public. Keep generated audit bundles containing real page content or WPCodeBox code outside this repository unless it is made private.
+## Development contract
 
-## Phase 2 — Client information architecture
+Read these before implementation:
 
-The incoming Canva brief will be mapped against the current audit graph instead of rebuilding blindly. That makes it possible to classify existing pages/features as retain, move, consolidate, rename, replace or retire.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md)
+- [`docs/deployment.md`](docs/deployment.md)
+- [`docs/TASK-canva-revision-current-vs-expected.md`](docs/TASK-canva-revision-current-vs-expected.md)
+- [`docs/audit-engine.md`](docs/audit-engine.md)
 
-## Phase 3 — WPCodeBox → first-party plugin
-
-The target is a version-controlled Bali Eling Spirit plugin containing the current renderer behavior as explicit modules instead of database-managed snippets. The migration should preserve current shortcode behavior first, then refactor internals once parity is confirmed.
-
-See [`docs/audit-engine.md`](docs/audit-engine.md) for the audit bundle contract and recommended migration sequence.
+The primary development rule is **reuse before rewrite**: preserve contracts, make the smallest verified delta, and keep every cutover independently reversible.
