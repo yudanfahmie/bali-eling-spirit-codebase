@@ -2,7 +2,7 @@
 /**
  * Site Core module ownership manifest.
  *
- * Runtime modules are fail-closed: only PLUGIN_LIVE entries may be loaded.
+ * Runtime modules are fail-closed: only PLUGIN_LIVE and WPBOX_OFF entries may load.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

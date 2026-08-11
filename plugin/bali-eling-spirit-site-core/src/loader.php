@@ -19,17 +19,23 @@ function bes_site_core_modules() {
 }
 
 /**
- * Load only modules whose cutover state is explicitly PLUGIN_LIVE.
+ * Load only modules whose cutover state keeps Site Core as runtime owner.
  *
- * PLUGIN_SHADOW source is deliberately present but inert. This prevents the
- * site-core plugin from double-registering hooks/functions while WPCodeBox is
- * still authoritative.
+ * PLUGIN_LIVE and WPBOX_OFF are executable. WPBOX_ONLY, PLUGIN_SHADOW, and
+ * unknown or malformed states remain inert so the loader always fails closed.
  *
  * @return void
  */
 function bes_site_core_load_modules() {
+    $executable_states = array( 'PLUGIN_LIVE', 'WPBOX_OFF' );
+
     foreach ( bes_site_core_modules() as $module ) {
-        if ( ! is_array( $module ) || 'PLUGIN_LIVE' !== ( $module['state'] ?? '' ) ) {
+        if ( ! is_array( $module ) ) {
+            continue;
+        }
+
+        $state = $module['state'] ?? '';
+        if ( ! is_string( $state ) || ! in_array( $state, $executable_states, true ) ) {
             continue;
         }
 
