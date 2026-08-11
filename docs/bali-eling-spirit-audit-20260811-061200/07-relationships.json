@@ -1,0 +1,733 @@
+{
+    "menu_to_content": [
+        {
+            "menu": "Explore Menu",
+            "menu_location": [],
+            "menu_item_title": "Home",
+            "menu_item_url": "https://balielingspirit.com/",
+            "destination_id": 2418,
+            "destination_type": "page",
+            "destination_title": "Homepage",
+            "destination_slug": "homepage",
+            "shortcodes": [
+                "bes_home_content"
+            ],
+            "builder_signals": [],
+            "template": "default"
+        },
+        {
+            "menu": "Explore Menu",
+            "menu_location": [],
+            "menu_item_title": "About Us",
+            "menu_item_url": "https://balielingspirit.com/about-us/",
+            "destination_id": 35,
+            "destination_type": "page",
+            "destination_title": "About Us",
+            "destination_slug": "about-us",
+            "shortcodes": [
+                "bes_about_us"
+            ],
+            "builder_signals": [
+                "Elementor:_elementor_data"
+            ],
+            "template": "elementor_header_footer"
+        },
+        {
+            "menu": "Explore Menu",
+            "menu_location": [],
+            "menu_item_title": "Sanctuary",
+            "menu_item_url": "https://balielingspirit.com/sanctuary/",
+            "destination_id": 927,
+            "destination_type": "page",
+            "destination_title": "Sanctuary",
+            "destination_slug": "sanctuary",
+            "shortcodes": [
+                "bes_sanctuary_hub"
+            ],
+            "builder_signals": [
+                "Elementor:_elementor_data"
+            ],
+            "template": "elementor_header_footer"
+        },
+        {
+            "menu": "Explore Menu",
+            "menu_location": [],
+            "menu_item_title": "Wisdom",
+            "menu_item_url": "https://balielingspirit.com/wisdom/",
+            "destination_id": 33,
+            "destination_type": "page",
+            "destination_title": "Wisdom",
+            "destination_slug": "wisdom",
+            "shortcodes": [
+                "bes_blog_archive"
+            ],
+            "builder_signals": [],
+            "template": "elementor_header_footer"
+        },
+        {
+            "menu": "Healing &amp; Retreat",
+            "menu_location": [],
+            "menu_item_title": "#33 (no title)",
+            "menu_item_url": "",
+            "destination_id": 33,
+            "destination_type": "page",
+            "destination_title": "Wisdom",
+            "destination_slug": "wisdom",
+            "shortcodes": [
+                "bes_blog_archive"
+            ],
+            "builder_signals": [],
+            "template": "elementor_header_footer"
+        },
+        {
+            "menu": "Healing &amp; Retreat",
+            "menu_location": [],
+            "menu_item_title": "#34 (no title)",
+            "menu_item_url": "",
+            "destination_id": 34,
+            "destination_type": null,
+            "destination_title": null,
+            "destination_slug": null,
+            "shortcodes": [],
+            "builder_signals": [],
+            "template": null
+        },
+        {
+            "menu": "Healing &amp; Retreat",
+            "menu_location": [],
+            "menu_item_title": "#35 (no title)",
+            "menu_item_url": "",
+            "destination_id": 35,
+            "destination_type": "page",
+            "destination_title": "About Us",
+            "destination_slug": "about-us",
+            "shortcodes": [
+                "bes_about_us"
+            ],
+            "builder_signals": [
+                "Elementor:_elementor_data"
+            ],
+            "template": "elementor_header_footer"
+        },
+        {
+            "menu": "Healing &amp; Retreat",
+            "menu_location": [],
+            "menu_item_title": "#36 (no title)",
+            "menu_item_url": "",
+            "destination_id": 36,
+            "destination_type": null,
+            "destination_title": null,
+            "destination_slug": null,
+            "shortcodes": [],
+            "builder_signals": [],
+            "template": null
+        },
+        {
+            "menu": "Healing &amp; Retreat",
+            "menu_location": [],
+            "menu_item_title": "#37 (no title)",
+            "menu_item_url": "",
+            "destination_id": 37,
+            "destination_type": null,
+            "destination_title": null,
+            "destination_slug": null,
+            "shortcodes": [],
+            "builder_signals": [],
+            "template": null
+        },
+        {
+            "menu": "Main Menu",
+            "menu_location": [
+                "menu-1"
+            ],
+            "menu_item_title": "About Us",
+            "menu_item_url": "https://balielingspirit.com/about-us/",
+            "destination_id": 35,
+            "destination_type": "page",
+            "destination_title": "About Us",
+            "destination_slug": "about-us",
+            "shortcodes": [
+                "bes_about_us"
+            ],
+            "builder_signals": [
+                "Elementor:_elementor_data"
+            ],
+            "template": "elementor_header_footer"
+        },
+        {
+            "menu": "Main Menu",
+            "menu_location": [
+                "menu-1"
+            ],
+            "menu_item_title": "Sanctuary",
+            "menu_item_url": "https://balielingspirit.com/sanctuary/",
+            "destination_id": 927,
+            "destination_type": "page",
+            "destination_title": "Sanctuary",
+            "destination_slug": "sanctuary",
+            "shortcodes": [
+                "bes_sanctuary_hub"
+            ],
+            "builder_signals": [
+                "Elementor:_elementor_data"
+            ],
+            "template": "elementor_header_footer"
+        },
+        {
+            "menu": "Main Menu",
+            "menu_location": [
+                "menu-1"
+            ],
+            "menu_item_title": "Academy",
+            "menu_item_url": "#",
+            "destination_id": 2500,
+            "destination_type": "nav_menu_item",
+            "destination_title": "Academy",
+            "destination_slug": "academy-2",
+            "shortcodes": [],
+            "builder_signals": [],
+            "template": null
+        },
+        {
+            "menu": "Main Menu",
+            "menu_location": [
+                "menu-1"
+            ],
+            "menu_item_title": "Yoga Teacher Training",
+            "menu_item_url": "https://balielingspirit.com/yoga-teacher-training/",
+            "destination_id": 31,
+            "destination_type": "page",
+            "destination_title": "Yoga Teacher Training",
+            "destination_slug": "yoga-teacher-training",
+            "shortcodes": [
+                "bes_yoga_teacher_training"
+            ],
+            "builder_signals": [
+                "Elementor:_elementor_data"
+            ],
+            "template": "elementor_header_footer"
+        },
+        {
+            "menu": "Main Menu",
+            "menu_location": [
+                "menu-1"
+            ],
+            "menu_item_title": "Eling Meditation Course",
+            "menu_item_url": "https://balielingspirit.com/yoga-teacher-training/eling-meditation-course/",
+            "destination_id": 2442,
+            "destination_type": "page",
+            "destination_title": "Eling Meditation Course",
+            "destination_slug": "eling-meditation-course",
+            "shortcodes": [
+                "bes_meditation_course"
+            ],
+            "builder_signals": [],
+            "template": "default"
+        },
+        {
+            "menu": "Main Menu",
+            "menu_location": [
+                "menu-1"
+            ],
+            "menu_item_title": "Workshop",
+            "menu_item_url": "https://balielingspirit.com/yoga-teacher-training/workshop/",
+            "destination_id": 2441,
+            "destination_type": "page",
+            "destination_title": "Workshop",
+            "destination_slug": "workshop",
+            "shortcodes": [
+                "bes_online_workshop"
+            ],
+            "builder_signals": [],
+            "template": "default"
+        },
+        {
+            "menu": "Main Menu",
+            "menu_location": [
+                "menu-1"
+            ],
+            "menu_item_title": "Wisdom",
+            "menu_item_url": "https://balielingspirit.com/wisdom/",
+            "destination_id": 33,
+            "destination_type": "page",
+            "destination_title": "Wisdom",
+            "destination_slug": "wisdom",
+            "shortcodes": [
+                "bes_blog_archive"
+            ],
+            "builder_signals": [],
+            "template": "elementor_header_footer"
+        },
+        {
+            "menu": "Menu",
+            "menu_location": [],
+            "menu_item_title": "Home",
+            "menu_item_url": "https://balielingspirit.com/home/",
+            "destination_id": 16,
+            "destination_type": "page",
+            "destination_title": "Home",
+            "destination_slug": "home",
+            "shortcodes": [
+                "trustindex",
+                "wp_social_ninja"
+            ],
+            "builder_signals": [
+                "Elementor:_elementor_data"
+            ],
+            "template": "elementor_header_footer"
+        },
+        {
+            "menu": "Menu",
+            "menu_location": [],
+            "menu_item_title": "Sanctuary",
+            "menu_item_url": "https://balielingspirit.com/sanctuary/",
+            "destination_id": 927,
+            "destination_type": "page",
+            "destination_title": "Sanctuary",
+            "destination_slug": "sanctuary",
+            "shortcodes": [
+                "bes_sanctuary_hub"
+            ],
+            "builder_signals": [
+                "Elementor:_elementor_data"
+            ],
+            "template": "elementor_header_footer"
+        },
+        {
+            "menu": "Menu",
+            "menu_location": [],
+            "menu_item_title": "Yoga Teacher Training",
+            "menu_item_url": "https://balielingspirit.com/yoga-teacher-training/",
+            "destination_id": 31,
+            "destination_type": "page",
+            "destination_title": "Yoga Teacher Training",
+            "destination_slug": "yoga-teacher-training",
+            "shortcodes": [
+                "bes_yoga_teacher_training"
+            ],
+            "builder_signals": [
+                "Elementor:_elementor_data"
+            ],
+            "template": "elementor_header_footer"
+        },
+        {
+            "menu": "Menu",
+            "menu_location": [],
+            "menu_item_title": "Wisdom",
+            "menu_item_url": "https://balielingspirit.com/wisdom/",
+            "destination_id": 33,
+            "destination_type": "page",
+            "destination_title": "Wisdom",
+            "destination_slug": "wisdom",
+            "shortcodes": [
+                "bes_blog_archive"
+            ],
+            "builder_signals": [],
+            "template": "elementor_header_footer"
+        },
+        {
+            "menu": "Menu",
+            "menu_location": [],
+            "menu_item_title": "About Us",
+            "menu_item_url": "https://balielingspirit.com/about-us/",
+            "destination_id": 35,
+            "destination_type": "page",
+            "destination_title": "About Us",
+            "destination_slug": "about-us",
+            "shortcodes": [
+                "bes_about_us"
+            ],
+            "builder_signals": [
+                "Elementor:_elementor_data"
+            ],
+            "template": "elementor_header_footer"
+        },
+        {
+            "menu": "Programs Menu",
+            "menu_location": [],
+            "menu_item_title": "Yoga Teacher Training",
+            "menu_item_url": "https://balielingspirit.com/yoga-teacher-training/",
+            "destination_id": 31,
+            "destination_type": "page",
+            "destination_title": "Yoga Teacher Training",
+            "destination_slug": "yoga-teacher-training",
+            "shortcodes": [
+                "bes_yoga_teacher_training"
+            ],
+            "builder_signals": [
+                "Elementor:_elementor_data"
+            ],
+            "template": "elementor_header_footer"
+        },
+        {
+            "menu": "Programs Menu",
+            "menu_location": [],
+            "menu_item_title": "Tapa Brata",
+            "menu_item_url": "https://balielingspirit.com/eling-tapa-brata/",
+            "destination_id": 2425,
+            "destination_type": "page",
+            "destination_title": "Eling Tapa Brata",
+            "destination_slug": "eling-tapa-brata",
+            "shortcodes": [
+                "bes_eling_tapa_brata"
+            ],
+            "builder_signals": [],
+            "template": "default"
+        },
+        {
+            "menu": "Programs Menu",
+            "menu_location": [],
+            "menu_item_title": "Eling Sanctuary Retreat",
+            "menu_item_url": "https://balielingspirit.com/eling-sanctuary-retreat/",
+            "destination_id": 2477,
+            "destination_type": "page",
+            "destination_title": "Eling Sanctuary Retreat",
+            "destination_slug": "eling-sanctuary-retreat",
+            "shortcodes": [
+                "bes_eling_sanctuary_retreat"
+            ],
+            "builder_signals": [],
+            "template": "default"
+        },
+        {
+            "menu": "Programs Menu",
+            "menu_location": [],
+            "menu_item_title": "Sanctuary",
+            "menu_item_url": "https://balielingspirit.com/sanctuary/",
+            "destination_id": 927,
+            "destination_type": "page",
+            "destination_title": "Sanctuary",
+            "destination_slug": "sanctuary",
+            "shortcodes": [
+                "bes_sanctuary_hub"
+            ],
+            "builder_signals": [
+                "Elementor:_elementor_data"
+            ],
+            "template": "elementor_header_footer"
+        },
+        {
+            "menu": "Programs Menu",
+            "menu_location": [],
+            "menu_item_title": "Online Course",
+            "menu_item_url": "https://balielingspirit.com/online-course/",
+            "destination_id": 2481,
+            "destination_type": "page",
+            "destination_title": "Online Course",
+            "destination_slug": "online-course",
+            "shortcodes": [],
+            "builder_signals": [],
+            "template": "default"
+        },
+        {
+            "menu": "Programs Menu",
+            "menu_location": [],
+            "menu_item_title": "Workshop",
+            "menu_item_url": "https://balielingspirit.com/yoga-teacher-training/workshop/",
+            "destination_id": 2441,
+            "destination_type": "page",
+            "destination_title": "Workshop",
+            "destination_slug": "workshop",
+            "shortcodes": [
+                "bes_online_workshop"
+            ],
+            "builder_signals": [],
+            "template": "default"
+        }
+    ],
+    "summary": {
+        "captured_pages": 64,
+        "menu_relationships": 27,
+        "shortcode_usage_in_menu_targets": {
+            "bes_about_us": 4,
+            "bes_sanctuary_hub": 4,
+            "bes_blog_archive": 4,
+            "bes_yoga_teacher_training": 3,
+            "bes_online_workshop": 2,
+            "bes_home_content": 1,
+            "bes_meditation_course": 1,
+            "trustindex": 1,
+            "wp_social_ninja": 1,
+            "bes_eling_tapa_brata": 1,
+            "bes_eling_sanctuary_retreat": 1
+        },
+        "published_pages_not_in_any_menu": [
+            {
+                "id": 29,
+                "title": "Tapa Brata",
+                "slug": "tapa-brata",
+                "url": "https://balielingspirit.com/tapa-brata/"
+            },
+            {
+                "id": 332,
+                "title": "User Account",
+                "slug": "user-account",
+                "url": "https://balielingspirit.com/user-account/"
+            },
+            {
+                "id": 333,
+                "title": "Wishlist",
+                "slug": "wishlist",
+                "url": "https://balielingspirit.com/wishlist/"
+            },
+            {
+                "id": 334,
+                "title": "Checkout",
+                "slug": "checkout-lms",
+                "url": "https://balielingspirit.com/checkout-lms/"
+            },
+            {
+                "id": 335,
+                "title": "Instructor Public Account",
+                "slug": "instructor-public-account",
+                "url": "https://balielingspirit.com/instructor-public-account/"
+            },
+            {
+                "id": 336,
+                "title": "Student Public Account",
+                "slug": "student-public-account",
+                "url": "https://balielingspirit.com/student-public-account/"
+            },
+            {
+                "id": 341,
+                "title": "Courses page (for Elementor)",
+                "slug": "courses",
+                "url": "https://balielingspirit.com/courses/"
+            },
+            {
+                "id": 446,
+                "title": "Toko",
+                "slug": "shop",
+                "url": "https://balielingspirit.com/shop/"
+            },
+            {
+                "id": 447,
+                "title": "Keranjang",
+                "slug": "cart",
+                "url": "https://balielingspirit.com/cart/"
+            },
+            {
+                "id": 448,
+                "title": "Checkout",
+                "slug": "checkout",
+                "url": "https://balielingspirit.com/checkout/"
+            },
+            {
+                "id": 449,
+                "title": "Akun Saya",
+                "slug": "my-account",
+                "url": "https://balielingspirit.com/my-account/"
+            },
+            {
+                "id": 517,
+                "title": "Login / Register",
+                "slug": "login-register",
+                "url": "https://balielingspirit.com/login-register/"
+            },
+            {
+                "id": 2221,
+                "title": "Certificate Page",
+                "slug": "certificate-page",
+                "url": "https://balielingspirit.com/certificate-page/"
+            },
+            {
+                "id": 2222,
+                "title": "Courses page (for Gutenberg)",
+                "slug": "courses-archive-gutenberg",
+                "url": "https://balielingspirit.com/courses-archive-gutenberg/"
+            },
+            {
+                "id": 2423,
+                "title": "200 Hour Yoga Teacher Training",
+                "slug": "200hr-ytt",
+                "url": "https://balielingspirit.com/200hr-ytt/"
+            },
+            {
+                "id": 2424,
+                "title": "300 Hour Yoga Teacher Training",
+                "slug": "300hr-ytt",
+                "url": "https://balielingspirit.com/300hr-ytt/"
+            },
+            {
+                "id": 2426,
+                "title": "Sacred Morning Awakening",
+                "slug": "sacred-morning-awakening",
+                "url": "https://balielingspirit.com/sacred-morning-awakening/"
+            },
+            {
+                "id": 2427,
+                "title": "Karma Retreat",
+                "slug": "karma-retreat",
+                "url": "https://balielingspirit.com/karma-retreat/"
+            },
+            {
+                "id": 2428,
+                "title": "Punarbawa Retreat",
+                "slug": "punarbawa-retreat",
+                "url": "https://balielingspirit.com/punarbawa-retreat/"
+            },
+            {
+                "id": 2429,
+                "title": "Atma Retreat",
+                "slug": "atma-retreat",
+                "url": "https://balielingspirit.com/atma-retreat/"
+            },
+            {
+                "id": 2430,
+                "title": "7-Chakra Purification",
+                "slug": "7-chakra-purification",
+                "url": "https://balielingspirit.com/7-chakra-purification/"
+            },
+            {
+                "id": 2431,
+                "title": "Surya Namaskar",
+                "slug": "surya-namaskar",
+                "url": "https://balielingspirit.com/surya-namaskar/"
+            },
+            {
+                "id": 2432,
+                "title": "Events",
+                "slug": "events",
+                "url": "https://balielingspirit.com/events/"
+            },
+            {
+                "id": 2433,
+                "title": "Eling Guiding",
+                "slug": "eling-guiding",
+                "url": "https://balielingspirit.com/eling-guiding/"
+            },
+            {
+                "id": 2434,
+                "title": "Privacy Policy",
+                "slug": "privacy-policy",
+                "url": "https://balielingspirit.com/privacy-policy/"
+            },
+            {
+                "id": 2435,
+                "title": "Terms of Service",
+                "slug": "terms",
+                "url": "https://balielingspirit.com/terms/"
+            },
+            {
+                "id": 2436,
+                "title": "Sitemap",
+                "slug": "sitemap",
+                "url": "https://balielingspirit.com/sitemap/"
+            },
+            {
+                "id": 2437,
+                "title": "Bali Eling Spirit 200H",
+                "slug": "bali-eling-spirit-200h",
+                "url": "https://balielingspirit.com/bali-eling-spirit-200h/"
+            },
+            {
+                "id": 2438,
+                "title": "Bali Eling Spirit 200H Hybrid",
+                "slug": "bali-eling-spirit-200h-hybrid",
+                "url": "https://balielingspirit.com/bali-eling-spirit-200h-hybrid/"
+            },
+            {
+                "id": 2439,
+                "title": "Bali Eling Spirit 50H Hybrid",
+                "slug": "bali-eling-spirit-50h-hybrid",
+                "url": "https://balielingspirit.com/bali-eling-spirit-50h-hybrid/"
+            },
+            {
+                "id": 2440,
+                "title": "Bali Eling Spirit 50H",
+                "slug": "bali-eling-spirit-50h",
+                "url": "https://balielingspirit.com/bali-eling-spirit-50h/"
+            },
+            {
+                "id": 2486,
+                "title": "Healing Retreat",
+                "slug": "healing-retreat",
+                "url": "https://balielingspirit.com/healing-retreat/"
+            },
+            {
+                "id": 2488,
+                "title": "Eling Sanctuary Retreat",
+                "slug": "eling-sanctuary-retreat-2",
+                "url": "https://balielingspirit.com/eling-sanctuary-retreat-2/"
+            },
+            {
+                "id": 3319,
+                "title": "Homepage v2",
+                "slug": "homepage-v2",
+                "url": "https://balielingspirit.com/homepage-v2/"
+            },
+            {
+                "id": 3415,
+                "title": "Program",
+                "slug": "program",
+                "url": "https://balielingspirit.com/program/"
+            },
+            {
+                "id": 3416,
+                "title": "Eling Sound Awakening",
+                "slug": "eling-sound-awakening",
+                "url": "https://balielingspirit.com/program/eling-sound-awakening/"
+            },
+            {
+                "id": 3417,
+                "title": "Session with the Founder with Aji Bhagawan",
+                "slug": "session-with-the-founder-with-aji-bhagawan",
+                "url": "https://balielingspirit.com/program/session-with-the-founder-with-aji-bhagawan/"
+            },
+            {
+                "id": 3418,
+                "title": "Eling Retreat",
+                "slug": "eling-retreat",
+                "url": "https://balielingspirit.com/eling-retreat/"
+            },
+            {
+                "id": 3419,
+                "title": "Personal Eling Session with the Yogi",
+                "slug": "personal-eling-session-with-the-yogi",
+                "url": "https://balielingspirit.com/program/personal-eling-session-with-the-yogi/"
+            },
+            {
+                "id": 3420,
+                "title": "Contact Bali Eling Spirit",
+                "slug": "contact",
+                "url": "https://balielingspirit.com/contact/"
+            },
+            {
+                "id": 3427,
+                "title": "Program Categories",
+                "slug": "program-category",
+                "url": "https://balielingspirit.com/program-category/"
+            },
+            {
+                "id": 3428,
+                "title": "Private Sacred Sessions",
+                "slug": "private-sacred-sessions",
+                "url": "https://balielingspirit.com/program-category/private-sacred-sessions/"
+            },
+            {
+                "id": 3474,
+                "title": "Sound Chakra Healing",
+                "slug": "sound-chakra-healing",
+                "url": "https://balielingspirit.com/program/sound-chakra-healing/"
+            },
+            {
+                "id": 3475,
+                "title": "7 Chakra Crystal Healing",
+                "slug": "7-chakra-crystal-healing",
+                "url": "https://balielingspirit.com/program/7-chakra-crystal-healing/"
+            },
+            {
+                "id": 3476,
+                "title": "Partnership",
+                "slug": "partnership",
+                "url": "https://balielingspirit.com/partnership/"
+            },
+            {
+                "id": 3477,
+                "title": "Pasraman Bali Eling Spirit",
+                "slug": "pasraman",
+                "url": "https://balielingspirit.com/pasraman/"
+            }
+        ]
+    }
+}

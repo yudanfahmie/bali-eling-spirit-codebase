@@ -1,0 +1,24 @@
+{
+    "engine": "Bali Eling Spirit Audit Engine",
+    "engine_version": "0.2.2",
+    "generated_at_utc": "2026-08-11T06:11:54+00:00",
+    "include_code": true,
+    "site": "https://balielingspirit.com/",
+    "peak_memory_bytes": 86339584,
+    "files": [
+        "01-environment.json",
+        "02-content.json",
+        "03-navigation.json",
+        "04-extensions.json",
+        "05-shortcodes.json",
+        "06-wpcodebox.json",
+        "07-relationships.json"
+    ],
+    "notes": [
+        "No database credentials, auth salts, user passwords, WooCommerce orders/customers or session data are intentionally exported.",
+        "Full item capture is focused on WordPress pages; non-page public post types are summarized to avoid loading large product/LMS catalogs in one request.",
+        "Menu-linked non-page content is captured when include_code=true.",
+        "WPCodeBox tables are discovered using the active WordPress table prefix.",
+        "Password/token/secret/license/key-like WPCodeBox columns are omitted. Secrets embedded inside snippet source are not modified because that would corrupt migration code."
+    ]
+}

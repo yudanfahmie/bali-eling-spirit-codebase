@@ -1,0 +1,479 @@
+{
+    "plugins": [
+        {
+            "file": "advanced-custom-fields-pro/acf.php",
+            "name": "Advanced Custom Fields PRO",
+            "version": "6.8.7",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "antispam-bee/antispam_bee.php",
+            "name": "Antispam Bee",
+            "version": "2.11.12",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "bali-eling-spirit-audit-engine/bali-eling-spirit-audit-engine.php",
+            "name": "Bali Eling Spirit Audit Engine",
+            "version": "0.2.2",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "classic-editor/classic-editor.php",
+            "name": "Classic Editor",
+            "version": "1.7.0",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "doku-payment/doku-payment.php",
+            "name": "DOKU Payment",
+            "version": "1.3.29",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "duplicator-pro/duplicator-pro.php",
+            "name": "Duplicator Pro",
+            "version": "4.5.25.3",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "dynamic-elementor-acf-repeater/dynamic-elementor-acf-repeater.php",
+            "name": "Dynamic ACF Repeater for Elementor",
+            "version": "2.4.8",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "elementor/elementor.php",
+            "name": "Elementor",
+            "version": "4.2.2",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "mec-shortcode-builder/mec-shortcode-builder.php",
+            "name": "Elementor Shortcode Builder for MEC",
+            "version": "2.0.0",
+            "active": false,
+            "network_active": false
+        },
+        {
+            "file": "mec-shortcode-designer/mec-shortcode-designer.php",
+            "name": "Elementor Shortcode Designer",
+            "version": "1.5.0",
+            "active": false,
+            "network_active": false
+        },
+        {
+            "file": "mec-single-builder/mec-single-builder.php",
+            "name": "Elementor Single Builder for MEC",
+            "version": "1.13.0",
+            "active": false,
+            "network_active": false
+        },
+        {
+            "file": "elementskit-lite/elementskit-lite.php",
+            "name": "ElementsKit Lite",
+            "version": "3.10.02",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "essential-addons-for-elementor-lite/essential_adons_elementor.php",
+            "name": "Essential Addons for Elementor",
+            "version": "6.7.2",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "fluent-smtp/fluent-smtp.php",
+            "name": "FluentSMTP",
+            "version": "2.3.0",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "flying-press/flying-press.php",
+            "name": "FlyingPress",
+            "version": "5.4.3",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "gum-elementor-addon/gum-elementor-addon.php",
+            "name": "Gum Addon for Elementor",
+            "version": "1.3.17",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "loginizer-pro/loginizer.php",
+            "name": "Loginizer Pro",
+            "version": "2.0.7",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "mh-maintenance-reporter/mh-maintenance-reporter.php",
+            "name": "Maintenance Reporter by Markas Hosting",
+            "version": "2.11.16",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "masterstudy-lms-learning-management-system/masterstudy-lms-learning-management-system.php",
+            "name": "MasterStudy LMS WordPress Plugin – for Online Courses and Education",
+            "version": "3.7.41",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "masterstudy-lms-learning-management-system-pro/masterstudy-lms-learning-management-system-pro.php",
+            "name": "MasterStudy LMS – Online Courses, eLearning PRO Plus",
+            "version": "4.8.18",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "modern-events-calendar/mec.php",
+            "name": "Modern Events Calendar",
+            "version": "7.29.0",
+            "active": false,
+            "network_active": false
+        },
+        {
+            "file": "presto-player/presto-player.php",
+            "name": "Presto Player",
+            "version": "4.3.3",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "pro-elements/pro-elements.php",
+            "name": "PRO Elements",
+            "version": "4.1.0",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "seo-by-rank-math/rank-math.php",
+            "name": "Rank Math SEO",
+            "version": "1.0.275",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "seo-by-rank-math-pro/rank-math-pro.php",
+            "name": "Rank Math SEO PRO",
+            "version": "3.0.111",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "secure-copy-content-protection/secure-copy-content-protection.php",
+            "name": "Secure Copy Content Protection",
+            "version": "5.2.2",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "template-kit-import/template-kit-import.php",
+            "name": "Template Kit Import",
+            "version": "1.0.16",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "header-footer-elementor/header-footer-elementor.php",
+            "name": "Ultimate Addons for Elementor (UAE)",
+            "version": "2.9.2",
+            "active": false,
+            "network_active": false
+        },
+        {
+            "file": "unlimited-elements-for-elementor/unlimited_elements.php",
+            "name": "Unlimited Elements for Elementor",
+            "version": "2.0.16",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "wp-reviews-plugin-for-google/wp-reviews-plugin-for-google.php",
+            "name": "Widgets for Google Reviews",
+            "version": "13.3.1",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "woocommerce/woocommerce.php",
+            "name": "WooCommerce",
+            "version": "11.0.0",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "mec-woocommerce/mec-woocommerce.php",
+            "name": "WooCommerce Integration for MEC",
+            "version": "2.2.0",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "wpcodebox2/wpcodebox2.php",
+            "name": "WPCodeBox 2",
+            "version": "1.1.1",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "wps-hide-login/wps-hide-login.php",
+            "name": "WPS Hide Login",
+            "version": "1.9.18",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "wp-social-reviews/wp-social-reviews.php",
+            "name": "WP Social Ninja",
+            "version": "4.3.2",
+            "active": true,
+            "network_active": false
+        },
+        {
+            "file": "wp-importer-custom-fields-basic-pro/wp-importer-custom-fields-basic-pro.php",
+            "name": "WP Ultimate CSV Importer - Custom Fields Import",
+            "version": "8.1",
+            "active": false,
+            "network_active": false
+        },
+        {
+            "file": "duplicate-post/duplicate-post.php",
+            "name": "Yoast Duplicate Post",
+            "version": "4.7",
+            "active": true,
+            "network_active": false
+        }
+    ],
+    "woocommerce": {
+        "active": true,
+        "version": "11.0.0",
+        "pages": {
+            "shop": {
+                "id": 446,
+                "title": "Toko",
+                "url": "https://balielingspirit.com/shop/"
+            },
+            "cart": {
+                "id": 447,
+                "title": "Keranjang",
+                "url": "https://balielingspirit.com/cart/"
+            },
+            "checkout": {
+                "id": 448,
+                "title": "Checkout",
+                "url": "https://balielingspirit.com/checkout/"
+            },
+            "myaccount": {
+                "id": 449,
+                "title": "Akun Saya",
+                "url": "https://balielingspirit.com/my-account/"
+            },
+            "terms": {
+                "id": -1,
+                "title": null,
+                "url": null
+            }
+        }
+    },
+    "lms_signals": [
+        {
+            "type": "plugin",
+            "lms": "masterstudy",
+            "source": "masterstudy-lms-learning-management-system/masterstudy-lms-learning-management-system.php"
+        },
+        {
+            "type": "plugin",
+            "lms": "masterstudy",
+            "source": "masterstudy-lms-learning-management-system-pro/masterstudy-lms-learning-management-system-pro.php"
+        },
+        {
+            "type": "post_type",
+            "lms": "unknown-or-custom",
+            "source": "stm-courses"
+        },
+        {
+            "type": "post_type",
+            "lms": "unknown-or-custom",
+            "source": "stm-lessons"
+        },
+        {
+            "type": "post_type",
+            "lms": "unknown-or-custom",
+            "source": "stm-course-bundles"
+        }
+    ],
+    "public_post_types": [
+        {
+            "name": "post",
+            "label": "Posts",
+            "rest_base": "posts",
+            "hierarchical": false,
+            "has_archive": false,
+            "rewrite": false,
+            "published": 3
+        },
+        {
+            "name": "page",
+            "label": "Pages",
+            "rest_base": "pages",
+            "hierarchical": true,
+            "has_archive": false,
+            "rewrite": false,
+            "published": 57
+        },
+        {
+            "name": "attachment",
+            "label": "Media",
+            "rest_base": "media",
+            "hierarchical": false,
+            "has_archive": false,
+            "rewrite": false,
+            "published": 0
+        },
+        {
+            "name": "e-floating-buttons",
+            "label": "Floating Elements",
+            "rest_base": false,
+            "hierarchical": false,
+            "has_archive": false,
+            "rewrite": {
+                "slug": "e-floating-buttons",
+                "with_front": true,
+                "pages": true,
+                "feeds": false,
+                "ep_mask": 1
+            },
+            "published": 0
+        },
+        {
+            "name": "elementor_library",
+            "label": "My Templates",
+            "rest_base": false,
+            "hierarchical": false,
+            "has_archive": false,
+            "rewrite": false,
+            "published": 25
+        },
+        {
+            "name": "elementskit_content",
+            "label": "ElementsKit items",
+            "rest_base": "elementskit-content",
+            "hierarchical": true,
+            "has_archive": false,
+            "rewrite": {
+                "slug": "elementskit-content",
+                "with_front": true,
+                "pages": false,
+                "feeds": false,
+                "ep_mask": 1
+            },
+            "published": 1
+        },
+        {
+            "name": "product",
+            "label": "Products",
+            "rest_base": false,
+            "hierarchical": false,
+            "has_archive": "shop",
+            "rewrite": {
+                "slug": "produk",
+                "with_front": false,
+                "feeds": true,
+                "pages": true,
+                "ep_mask": 1
+            },
+            "published": 9
+        },
+        {
+            "name": "stm-courses",
+            "label": "Courses",
+            "rest_base": false,
+            "hierarchical": false,
+            "has_archive": false,
+            "rewrite": {
+                "slug": "courses",
+                "with_front": true,
+                "pages": true,
+                "feeds": false,
+                "ep_mask": 1
+            },
+            "published": 1
+        },
+        {
+            "name": "stm-lessons",
+            "label": "Lessons",
+            "rest_base": false,
+            "hierarchical": false,
+            "has_archive": false,
+            "rewrite": {
+                "slug": "stm-lessons",
+                "with_front": true,
+                "pages": true,
+                "feeds": false,
+                "ep_mask": 1
+            },
+            "published": 56
+        },
+        {
+            "name": "stm-course-bundles",
+            "label": "Course Bundles",
+            "rest_base": false,
+            "hierarchical": false,
+            "has_archive": false,
+            "rewrite": {
+                "slug": "stm-course-bundles",
+                "with_front": true,
+                "pages": true,
+                "feeds": false,
+                "ep_mask": 1
+            },
+            "published": 0
+        },
+        {
+            "name": "pp_video_block",
+            "label": "Media Hub",
+            "rest_base": "presto-videos",
+            "hierarchical": false,
+            "has_archive": false,
+            "rewrite": {
+                "slug": "media",
+                "with_front": false,
+                "pages": true,
+                "feeds": false,
+                "ep_mask": 1
+            },
+            "published": 1
+        },
+        {
+            "name": "stm-certificates",
+            "label": "Certificates",
+            "rest_base": false,
+            "hierarchical": false,
+            "has_archive": false,
+            "rewrite": {
+                "slug": "stm-certificates",
+                "with_front": true,
+                "pages": true,
+                "feeds": false,
+                "ep_mask": 1
+            },
+            "published": 11
+        }
+    ]
+}

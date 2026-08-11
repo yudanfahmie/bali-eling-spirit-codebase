@@ -1,0 +1,468 @@
+{
+    "registered": [
+        {
+            "tag": "acf",
+            "callback": "acf_shortcode"
+        },
+        {
+            "tag": "add_to_cart",
+            "callback": "WC_Shortcodes::product_add_to_cart"
+        },
+        {
+            "tag": "add_to_cart_url",
+            "callback": "WC_Shortcodes::product_add_to_cart_url"
+        },
+        {
+            "tag": "aioseo_html_sitemap",
+            "callback": "RankMath\\Sitemap\\Html\\Sitemap::shortcode"
+        },
+        {
+            "tag": "audio",
+            "callback": "wp_audio_shortcode"
+        },
+        {
+            "tag": "ays_block",
+            "callback": "Secure_Copy_Content_Protection_Public::sccp_blockcont_generate_shortcode"
+        },
+        {
+            "tag": "ays_block_subscribe",
+            "callback": "Secure_Copy_Content_Protection_Public::sccp_blocksubscribe_generate_shortcode"
+        },
+        {
+            "tag": "ays_sccp_subscribers_count",
+            "callback": "Ays_Sccp_Extra_Shortcodes_Public::ays_generate_subscribers_count_method"
+        },
+        {
+            "tag": "ays_sccp_user_display_name",
+            "callback": "Ays_Sccp_Extra_Shortcodes_Public::ays_generate_user_display_name_method"
+        },
+        {
+            "tag": "ays_sccp_user_email",
+            "callback": "Ays_Sccp_Extra_Shortcodes_Public::ays_generate_user_email_method"
+        },
+        {
+            "tag": "ays_sccp_user_first_name",
+            "callback": "Ays_Sccp_Extra_Shortcodes_Public::ays_generate_user_first_name_method"
+        },
+        {
+            "tag": "ays_sccp_user_last_name",
+            "callback": "Ays_Sccp_Extra_Shortcodes_Public::ays_generate_user_last_name_method"
+        },
+        {
+            "tag": "ays_sccp_user_nickname",
+            "callback": "Ays_Sccp_Extra_Shortcodes_Public::ays_generate_user_nickname_method"
+        },
+        {
+            "tag": "ays_sccp_user_roles",
+            "callback": "Ays_Sccp_Extra_Shortcodes_Public::ays_generate_user_roles_method"
+        },
+        {
+            "tag": "bes_200h_ytt",
+            "callback": "bes_200h_ytt_render"
+        },
+        {
+            "tag": "bes_300h_ytt",
+            "callback": "bes_300h_ytt_render"
+        },
+        {
+            "tag": "bes_7_chakra_purification",
+            "callback": "bes_render_7_chakra_purification"
+        },
+        {
+            "tag": "bes_about_intro",
+            "callback": "bes_about_intro_shortcode"
+        },
+        {
+            "tag": "bes_about_us",
+            "callback": "bes_render_about_us"
+        },
+        {
+            "tag": "bes_atma_retreat",
+            "callback": "bes_render_atma_retreat"
+        },
+        {
+            "tag": "bes_blog_archive",
+            "callback": "bes_blog_archive_shortcode"
+        },
+        {
+            "tag": "bes_blog_section",
+            "callback": "bes_render_blog_section"
+        },
+        {
+            "tag": "bes_contact",
+            "callback": "bes_render_contact_section"
+        },
+        {
+            "tag": "bes_eling_guiding",
+            "callback": "bes_eling_guiding_render"
+        },
+        {
+            "tag": "bes_eling_sanctuary_retreat",
+            "callback": "bes_render_eling_sanctuary_retreat"
+        },
+        {
+            "tag": "bes_eling_tapa_brata",
+            "callback": "bes_eling_tapa_brata_render"
+        },
+        {
+            "tag": "bes_events",
+            "callback": "bes_events_render"
+        },
+        {
+            "tag": "bes_experience",
+            "callback": "bes_render_experience_section"
+        },
+        {
+            "tag": "bes_faqs",
+            "callback": "bes_render_faqs_section"
+        },
+        {
+            "tag": "bes_healing_retreat",
+            "callback": "bes_render_healing_retreat"
+        },
+        {
+            "tag": "bes_home_content",
+            "callback": "bes_render_home_content"
+        },
+        {
+            "tag": "bes_home_content_v2",
+            "callback": "bes_render_home_content_v2"
+        },
+        {
+            "tag": "bes_home_hero",
+            "callback": "bes_render_home_hero"
+        },
+        {
+            "tag": "bes_karma_retreat",
+            "callback": "bes_karma_retreat_render"
+        },
+        {
+            "tag": "bes_meditation_course",
+            "callback": "bes_render_meditation_course"
+        },
+        {
+            "tag": "bes_online_workshop",
+            "callback": "bes_render_workshop"
+        },
+        {
+            "tag": "bes_pillars",
+            "callback": "bes_pillars_shortcode"
+        },
+        {
+            "tag": "bes_privacy_policy",
+            "callback": "bes_privacy_policy_shortcode"
+        },
+        {
+            "tag": "bes_programs",
+            "callback": "bes_programs_shortcode"
+        },
+        {
+            "tag": "bes_punarbawa_retreat",
+            "callback": "bes_punarbawa_retreat_render"
+        },
+        {
+            "tag": "bes_sacred_morning",
+            "callback": "bes_sacred_morning_render"
+        },
+        {
+            "tag": "bes_sanctuary_hub",
+            "callback": "bes_render_sanctuary_hub"
+        },
+        {
+            "tag": "bes_sitemap",
+            "callback": "bes_sitemap_shortcode"
+        },
+        {
+            "tag": "bes_surya_namaskar",
+            "callback": "bes_render_surya_namaskar"
+        },
+        {
+            "tag": "bes_terms_of_service",
+            "callback": "bes_terms_of_service_shortcode"
+        },
+        {
+            "tag": "bes_testimonials",
+            "callback": "bes_render_testimonials_section"
+        },
+        {
+            "tag": "bes_trust_bar",
+            "callback": "bes_trust_bar_shortcode"
+        },
+        {
+            "tag": "bes_yoga_teacher_training",
+            "callback": "bes_render_ytt"
+        },
+        {
+            "tag": "bes_ytt_200h_hybrid_landing",
+            "callback": "bes_render_ytt_200h_hybrid"
+        },
+        {
+            "tag": "bes_ytt_200h_landing",
+            "callback": "bes_render_ytt_200h"
+        },
+        {
+            "tag": "bes_ytt_50h_hybrid_landing",
+            "callback": "bes_render_ytt_50h_hybrid"
+        },
+        {
+            "tag": "bes_ytt_50h_landing",
+            "callback": "bes_render_ytt_50h"
+        },
+        {
+            "tag": "bes_ytt_section",
+            "callback": "bes_ytt_section_shortcode"
+        },
+        {
+            "tag": "best_selling_products",
+            "callback": "WC_Shortcodes::best_selling_products"
+        },
+        {
+            "tag": "brand_products",
+            "callback": "WC_Brands::output_brand_products"
+        },
+        {
+            "tag": "caption",
+            "callback": "img_caption_shortcode"
+        },
+        {
+            "tag": "elementor-element",
+            "callback": "Closure"
+        },
+        {
+            "tag": "elementor-template",
+            "callback": "ElementorPro\\Modules\\Library\\Classes\\Shortcode::shortcode"
+        },
+        {
+            "tag": "embed",
+            "callback": "__return_false"
+        },
+        {
+            "tag": "featured_products",
+            "callback": "WC_Shortcodes::featured_products"
+        },
+        {
+            "tag": "gallery",
+            "callback": "gallery_shortcode"
+        },
+        {
+            "tag": "masterstudy_authorization_form",
+            "callback": "masterstudy_authorization_form_shortcode"
+        },
+        {
+            "tag": "masterstudy_instructor_registration",
+            "callback": "masterstudy_instructor_registration_shortcode"
+        },
+        {
+            "tag": "masterstudy_membership_pricing",
+            "callback": "masterstudy_membership_pricing_shortcode"
+        },
+        {
+            "tag": "playlist",
+            "callback": "wp_playlist_shortcode"
+        },
+        {
+            "tag": "pptime",
+            "callback": "PrestoPlayer\\Services\\Shortcodes::timestampShortcode"
+        },
+        {
+            "tag": "presto_player",
+            "callback": "PrestoPlayer\\Services\\Shortcodes::playerShortcode"
+        },
+        {
+            "tag": "presto_player_chapter",
+            "callback": "__return_false"
+        },
+        {
+            "tag": "presto_player_overlay",
+            "callback": "__return_false"
+        },
+        {
+            "tag": "presto_player_track",
+            "callback": "__return_false"
+        },
+        {
+            "tag": "presto_playlist",
+            "callback": "PrestoPlayer\\Services\\Shortcodes::playlistShortcode"
+        },
+        {
+            "tag": "presto_playlist_item",
+            "callback": "__return_false"
+        },
+        {
+            "tag": "presto_popup",
+            "callback": "PrestoPlayer\\Services\\Shortcodes::popupShortcode"
+        },
+        {
+            "tag": "presto_timestamp",
+            "callback": "PrestoPlayer\\Services\\Shortcodes::timestampShortcode"
+        },
+        {
+            "tag": "product",
+            "callback": "WC_Shortcodes::product"
+        },
+        {
+            "tag": "product_attribute",
+            "callback": "WC_Shortcodes::product_attribute"
+        },
+        {
+            "tag": "product_brand",
+            "callback": "WC_Brands::output_product_brand"
+        },
+        {
+            "tag": "product_brand_list",
+            "callback": "WC_Brands::output_product_brand_list"
+        },
+        {
+            "tag": "product_brand_thumbnails",
+            "callback": "WC_Brands::output_product_brand_thumbnails"
+        },
+        {
+            "tag": "product_brand_thumbnails_description",
+            "callback": "WC_Brands::output_product_brand_thumbnails_description"
+        },
+        {
+            "tag": "product_categories",
+            "callback": "WC_Shortcodes::product_categories"
+        },
+        {
+            "tag": "product_category",
+            "callback": "WC_Shortcodes::product_category"
+        },
+        {
+            "tag": "product_page",
+            "callback": "WC_Shortcodes::product_page"
+        },
+        {
+            "tag": "products",
+            "callback": "WC_Shortcodes::products"
+        },
+        {
+            "tag": "rank_math_html_sitemap",
+            "callback": "RankMath\\Sitemap\\Html\\Sitemap::shortcode"
+        },
+        {
+            "tag": "rank_math_related_posts",
+            "callback": "RankMathPro\\Link_Genius\\Shortcodes\\Related_Posts_Shortcode::render_shortcode"
+        },
+        {
+            "tag": "rank_math_review_snippet",
+            "callback": "RankMath\\Schema\\Snippet_Shortcode::rich_snippet"
+        },
+        {
+            "tag": "rank_math_rich_snippet",
+            "callback": "RankMath\\Schema\\Snippet_Shortcode::rich_snippet"
+        },
+        {
+            "tag": "rank_math_seo_score",
+            "callback": "RankMath\\Frontend_SEO_Score::shortcode"
+        },
+        {
+            "tag": "recent_products",
+            "callback": "WC_Shortcodes::recent_products"
+        },
+        {
+            "tag": "related_products",
+            "callback": "WC_Shortcodes::related_products"
+        },
+        {
+            "tag": "sale_products",
+            "callback": "WC_Shortcodes::sale_products"
+        },
+        {
+            "tag": "shop_messages",
+            "callback": "WC_Shortcodes::shop_messages"
+        },
+        {
+            "tag": "site_copyright",
+            "callback": "site_footer_copyright"
+        },
+        {
+            "tag": "stm_courses_searchbox",
+            "callback": "stm_courses_searchbox_shortcode"
+        },
+        {
+            "tag": "stm_lms_certificate_checker",
+            "callback": "STM_LMS_Certificates::add_shortcode"
+        },
+        {
+            "tag": "stm_lms_course_bundles",
+            "callback": "masterstudy_lms_course_bundle_shortcode"
+        },
+        {
+            "tag": "stm_lms_courses_carousel",
+            "callback": "stm_lms_courses_carousel_shortcode"
+        },
+        {
+            "tag": "stm_lms_courses_categories",
+            "callback": "stm_lms_courses_categories_shortcode"
+        },
+        {
+            "tag": "stm_lms_courses_grid",
+            "callback": "stm_lms_courses_grid_shortcode"
+        },
+        {
+            "tag": "stm_lms_courses_grid_display",
+            "callback": "stm_lms_courses_grid_display"
+        },
+        {
+            "tag": "stm_lms_featured_teacher",
+            "callback": "stm_lms_featured_teacher_shortcode"
+        },
+        {
+            "tag": "stm_lms_instructors_carousel",
+            "callback": "stm_lms_instructors_carousel_shortcode"
+        },
+        {
+            "tag": "stm_lms_recent_courses",
+            "callback": "stm_lms_recent_courses_shortcode"
+        },
+        {
+            "tag": "stm_lms_single_course_carousel",
+            "callback": "stm_lms_single_course_carousel_shortcode"
+        },
+        {
+            "tag": "top_rated_products",
+            "callback": "WC_Shortcodes::top_rated_products"
+        },
+        {
+            "tag": "trustindex",
+            "callback": "TrustindexPlugin_google::shortcode_func"
+        },
+        {
+            "tag": "video",
+            "callback": "wp_video_shortcode"
+        },
+        {
+            "tag": "woocommerce_cart",
+            "callback": "WC_Shortcodes::cart"
+        },
+        {
+            "tag": "woocommerce_checkout",
+            "callback": "WC_Shortcodes::checkout"
+        },
+        {
+            "tag": "woocommerce_messages",
+            "callback": "WC_Shortcodes::shop_messages"
+        },
+        {
+            "tag": "woocommerce_my_account",
+            "callback": "WC_Shortcodes::my_account"
+        },
+        {
+            "tag": "woocommerce_order_tracking",
+            "callback": "WC_Shortcodes::order_tracking"
+        },
+        {
+            "tag": "wp_caption",
+            "callback": "img_caption_shortcode"
+        },
+        {
+            "tag": "wp_social_ninja",
+            "callback": "WPSocialReviews\\App\\Hooks\\Handlers\\ShortcodeHandler::makeShortcode"
+        },
+        {
+            "tag": "ytt50h_tapabrata_page",
+            "callback": "bes_render_ytt50h_tapabrata"
+        }
+    ]
+}
