@@ -1,75 +1,103 @@
-# TASK — Canva Revision: Current State → Expected State
+# TASK — BES Canva Revision: Precision Delta Plan
 
-**Status:** READY FOR DEVELOPMENT  
+**Status:** READY FOR DEVELOPMENT WITH DATA GATES  
 **Priority:** High  
-**Strategy:** low effort / high impact, reuse before rewrite  
-**Sources of truth:**
-1. `docs/CANVA - Salinan dari Web Bahasa Indonesia/1.png`, `2.png`, `3.png` → layout, hierarchy, interaction intent.
-2. `Website BES.docx` → exact new copy/content/catalog.
-3. `docs/bali-eling-spirit-audit-20260811-061200/` → current WordPress runtime/routes.
-4. `docs/old-snippet-implementation-wpcodebox/` → actual legacy BES renderer/source implementation.
+**Strategy:** smallest safe delta, reuse > patch > add > defer  
+**Primary objective:** implement the 2026 Canva/DOCX brief without redesigning the existing BES runtime, changing vendor systems, or creating unnecessary routes.
+
+## 0. Source-of-truth order
+
+Use all four sources together; none is sufficient alone.
+
+1. `docs/bali-eling-spirit-audit-20260811-061200/` → **runtime baseline**: existing routes, pages, menus, shortcodes, plugins.
+2. `docs/old-snippet-implementation-wpcodebox/` → **implementation baseline**: actual BES shortcode/hook/rendering code currently living in WPCodeBox.
+3. `Website BES.docx` → **approved copy/catalog data**.
+4. Canva `1.png`, `2.png`, `3.png` → **visual hierarchy, sitemap, interaction and layout intent**.
+
+### Conflict rule
+
+- Existing behavior/route questions → audit wins.
+- Existing code/dependency questions → WPCodeBox source wins.
+- Copy, price, schedule, catalog questions → DOCX wins **unless DOCX contradicts itself or the Canva sitemap**; then mark as a data gate and do not guess.
+- Layout/interaction questions → Canva wins.
+- Never alter an unrelated working surface to make implementation “cleaner”.
 
 ---
 
-## 1. Engineering decision
+## 1. Engineering verdict
 
-The new plugin is **not** a WooCommerce/MasterStudy replacement. It is the version-controlled runtime bundle for **BES custom snippets currently living in WPCodeBox**.
+The correct implementation is **not a rebuild**.
 
 ```text
-WordPress
-├── WooCommerce / MasterStudy / Elementor / vendor plugins (unchanged)
-└── BES Snippet Plugin
-    └── custom BES shortcodes, hooks, UI, integrations previously in WPCodeBox
+CURRENT
+WP Page -> BES shortcode -> WPCodeBox snippet -> WordPress/vendor APIs
+
+TARGET
+WP Page -> SAME BES shortcode -> BES Snippet Plugin -> WordPress/vendor APIs
 ```
 
-### Rules
-- Preserve existing shortcode names whenever a page already uses one.
-- Do not copy vendor plugin source into BES plugin.
-- Do not rebuild unaffected pages.
-- Canva = visual/interaction reference; DOCX = copy/catalog truth.
-- Reuse BES v3 global tokens/components/classes from current snippets.
-- Use WordPress Media Library assets; remove external demo/hotlinked images when a revised section is touched.
-- Never run the same migrated snippet simultaneously in WPCodeBox and plugin.
-- Full WPCodeBox migration is incremental; **Canva implementation must not wait for all legacy snippets to migrate**.
+The BES plugin is only the version-controlled runtime home for custom code previously stored in WPCodeBox. WooCommerce, MasterStudy, Elementor and other vendor plugins stay vendor-owned and unchanged.
+
+### Anti-overhaul rules
+
+- Preserve route and shortcode contracts wherever they already exist.
+- Patch only surfaces named in the brief.
+- Do not migrate all WPCodeBox snippets before starting this revision.
+- Do not perform legacy URL cleanup during content rollout.
+- Do not redesign global CSS/design tokens.
+- Do not create a page when a dropdown, existing page, or modal satisfies the brief.
+- Do not duplicate a migrated snippet in plugin + WPCodeBox at the same time.
+- Do not invent copy, program data, schedules, prices, teachers, policies or contact routing.
+- New code must use the existing BES visual language and shared utilities before adding new CSS/JS.
 
 ---
 
-## 2. Current state vs expected state
+## 2. Baseline → expectation → minimum delta
 
-| Area | Current truth | Expected | Action |
-|---|---|---|---|
-| Homepage | `/` uses `[bes_home_content]`; `/homepage-v2/` uses `[bes_home_content_v2]` | Existing v2 visual retained with latest client revisions | **Reuse v2; patch only deltas** |
-| Global header/footer | Custom renderer already exists in `Global Assets` snippet | New Sanctuary + Academy dropdowns; revised footer links/copy | **Modify existing global snippet** |
-| Sanctuary | `[bes_sanctuary_hub]` is old “3 depths / 3 programs” architecture | 4 categories: Healing & Therapy, Retreats, Tapa Brata, Corporate Service | **Refactor existing renderer** |
-| Healing & Therapy | No canonical hub | Dedicated landing + atomic program popups | **New renderer/page** |
-| Personal Session with Yogi | Existing published program route/content, no dedicated BES renderer contract | Dedicated landing; 4 child session popups | **Reuse existing WP page; replace body with new shortcode** |
-| Eling Sanctuary Retreat | Existing `[bes_eling_sanctuary_retreat]` | New Canva/DOCX copy/layout | **Rewrite content inside same shortcode contract** |
-| Tapa Brata | Multiple legacy representations exist | One current canonical experience | **Update current shortcode route; defer redirect cleanup until SEO check** |
-| Corporate Services | No current canonical renderer | Dedicated landing page | **New renderer/page** |
-| YTT | Existing `[bes_yoga_teacher_training]`, but catalog/copy structure differs | 50H, 100H, 200H, 300H paths per DOCX | **Reuse shell/design system; replace data/content architecture** |
-| Meditation Course | Existing `[bes_meditation_course]` | 3 stages + Complete Journey | **Rewrite same shortcode** |
-| Sound Healing Course | No canonical course page | Dedicated Eling Sound Healing Course | **New renderer/page** |
-| Pasraman | `/pasraman/` exists as raw WP content | Structured Canva page + 4 supplied programs | **Convert existing page to shortcode wrapper** |
-| Partnership | Existing published page | No new page copy supplied | **KEEP; nav/footer only** |
-| Wisdom | Existing `[bes_blog_archive]` | No structural change supplied | **KEEP** |
-| About Us | Existing `[bes_about_us]` | No structural change supplied | **KEEP** |
-| Woo/LMS/account | Vendor systems + custom BES snippets | No redesign requested here | **Do not touch beyond later 1:1 snippet migration** |
+| Surface | Current baseline | Expected brief | Minimum action | Class | Risk |
+|---|---|---|---|---|---|
+| Global header | `Global Assets` reads WordPress **Menu ID 48**, already builds parent/child dropdowns on desktop/mobile | Sanctuary + Academy dropdowns | **Update menu hierarchy; patch fallback only** | PATCH | Low |
+| Global footer | Existing global renderer | Revised copy + Explore + Programs | Patch existing footer arrays/markup | PATCH | Low |
+| Homepage | `/` = `[bes_home_content]`; preview = `[bes_home_content_v2]` | v2 retained; small 2026 deltas | Patch v2 only, then promote behind existing shortcode | PATCH | Low-Med |
+| Sanctuary | `[bes_sanctuary_hub]` = old 3-depth retreat hub | 4 category gateway | Reuse shortcode; replace data/sections | ADAPT | Med |
+| Healing & Therapy | No matching canonical gateway | Dedicated landing + 4 service popups + private-session child | Add one page/renderer + shared modal data | NEW | Med |
+| Personal Session with Yogi | Existing related published content, no approved dedicated renderer | Dedicated parent landing + 4 private-session popups | Reuse existing WP route if suitable; new shortcode renderer | ADAPT | Med |
+| Eling Sanctuary Retreat | Existing route + shortcode | New 2D1N / 3D2N copy/layout | Rewrite inside same contract | PATCH | Med |
+| Tapa Brata | Existing implementation + historical duplicates | New 4D3N current experience | Patch active canonical renderer only | PATCH | Med |
+| Corporate Service | No canonical approved renderer | Dedicated landing | Add one page/renderer | NEW | Med |
+| YTT | Existing `[bes_yoga_teacher_training]` + detail renderers | 50H / 100H / 200H / 300H catalog | Reuse shell/routes; update data/sections; add only 100H if missing | ADAPT | Med |
+| Meditation Course | Existing `[bes_meditation_course]` | Stage 1/2/3 + Complete Journey | Rewrite same shortcode; stages remain cards/sections | PATCH | Med |
+| Sound Healing Course | No canonical course page | Dedicated Eling Sound Healing Course | Add one page/renderer | NEW | Med |
+| Pasraman | Existing `/pasraman/` raw WP content | Canva-designed page + 4 approved programs | Keep route; move body to BES shortcode renderer | ADAPT | Med |
+| About Us | Existing `[bes_about_us]` | No requested structural change | Leave untouched | KEEP | Low |
+| Partnership | Existing published page | No supplied redesign copy | Leave untouched except nav/footer | KEEP | Low |
+| Wisdom | Existing `[bes_blog_archive]` | No requested structural change | Leave untouched | KEEP | Low |
+| Woo/LMS/account | Vendor runtime + custom BES integration snippets | No redesign request | Leave untouched | KEEP | High if touched |
+
+**Rule:** `KEEP` items are regression-test targets, not development targets.
 
 ---
 
-## 3. Target navigation
+## 3. Navigation — use the engine already present
 
-### Header
-Logo remains Home. Keep Login / Sign Up control.
+The current `Global Assets` snippet already:
+- loads WordPress Menu ID `48`;
+- builds a parent/child tree;
+- renders desktop dropdowns;
+- renders mobile expandable submenus.
+
+Therefore **do not build a second navigation engine**.
+
+### Menu 48 target
 
 ```text
 About Us
-Sanctuary ▼
+Sanctuary
   ├─ Healing & Therapy
   ├─ Retreats
   ├─ Tapa Brata
   └─ Corporate Service
-Academy ▼
+Academy
   ├─ Yoga Teacher Training
   ├─ Eling Meditation Course
   └─ Eling Sound Healing Course
@@ -78,280 +106,464 @@ Partnership
 Wisdom
 ```
 
-Implementation: extend the existing `BES_NAV_LINKS`/custom header renderer into nested items. Do **not** introduce a second navigation engine.
+### Route strategy
 
-### Suggested route reuse
-- About Us → `/about-us/`
-- Sanctuary → `/sanctuary/`
-- Healing & Therapy → new `/healing-therapy/`
-- Retreats → existing `/eling-sanctuary-retreat/` while it is the only catalog retreat
-- Tapa Brata → keep current menu-linked shortcode route during rollout; canonical cleanup later
-- Corporate Service → new `/corporate-services/`
-- Yoga Teacher Training → `/yoga-teacher-training/`
-- Eling Meditation Course → existing `/yoga-teacher-training/eling-meditation-course/`
-- Eling Sound Healing Course → new `/eling-sound-healing-course/`
-- Pasraman → `/pasraman/`
-- Partnership → `/partnership/`
-- Wisdom → `/wisdom/`
+- Sanctuary parent → existing `/sanctuary/`.
+- Academy is a structural parent in phase 1. **Do not create `/academy/` only to satisfy the menu.** If it has no approved page, render the parent as a non-dead dropdown trigger rather than a fake `#` CTA.
+- Healing & Therapy → new `/healing-therapy/`.
+- Retreats → existing Eling Sanctuary Retreat route while it is the sole approved retreat catalog entry.
+- Tapa Brata → current active route; defer duplicate/canonical cleanup.
+- Corporate Service → new `/corporate-services/`.
+- YTT → existing `/yoga-teacher-training/`.
+- Meditation → existing meditation course route.
+- Sound Healing Course → new `/eling-sound-healing-course/`.
+- Pasraman, Partnership, Wisdom → existing routes.
 
-No `/academy/` landing is required in phase 1 because the approved copy defines its three child experiences, not a separate Academy page. Academy can be a dropdown parent.
+Also update `BES_NAV_LINKS` only as a safe fallback; Menu 48 remains primary.
 
 ---
 
-## 4. Implementation sequence
+## 4. BES snippet plugin — incremental cutover, not big-bang migration
 
-### P0 — BES snippet plugin foundation
-
-Create `plugins/bali-eling-spirit-snippets/` as a thin deterministic loader.
-
-First migration batch only:
-- Global Assets / header / footer / shared design system.
-- Homepage v2.
-- Sanctuary hub.
-- Healing/retreat/Tapa Brata renderers touched by this revision.
-- YTT + Meditation Course renderers.
-- Shared price/tax/helper code required by the above.
-
-Keep unrelated LMS/account/404/blog administration snippets in WPCodeBox until their own parity migration.
-
-**Important:** disable each WPCodeBox counterpart only after the plugin-loaded copy is verified.
-
-### P0 — Shared catalog config
-
-Add one small shared catalog/config file for values repeated across homepage, dropdowns, cards, modals and pages:
+Create:
 
 ```text
-program key
+plugins/bali-eling-spirit-snippets/
+├── bali-eling-spirit-snippets.php
+├── modules.php
+├── config/
+│   ├── programs.php
+│   └── contacts.php
+├── snippets/
+│   ├── global/
+│   ├── homepage/
+│   ├── sanctuary/
+│   ├── academy/
+│   └── pasraman/
+└── assets/
+```
+
+### First migration batch only
+
+1. Global Assets / header / footer / shared design system.
+2. Homepage v2 + production homepage wrapper.
+3. Sanctuary + related program renderers touched by this brief.
+4. YTT + Meditation renderers touched by this brief.
+5. New Sound Healing / Corporate / Healing & Therapy / Personal Session / Pasraman renderers.
+6. Shared price/tax/contact helpers required by those surfaces.
+
+Everything else remains in WPCodeBox until its own parity migration.
+
+### Cutover ledger
+
+Maintain each moved module in one explicit state:
+
+```text
+WPBOX_ONLY -> PLUGIN_SHADOW -> PLUGIN_LIVE -> WPBOX_OFF
+```
+
+- `PLUGIN_SHADOW`: file exists in repo but is not loaded.
+- `PLUGIN_LIVE`: plugin loads it only after the WPCodeBox counterpart is disabled.
+- Never allow the same shortcode/function/hook module to be live in both places.
+- Plugin activation must not automatically disable or rewrite WPCodeBox.
+
+This is the primary anti-zigzag/anti-fatal control.
+
+---
+
+## 5. Shared program facts — one source inside BES
+
+Create a small catalog config for facts repeated across cards, modals, menus and pages:
+
+```text
+key
 label
 route
-type: page | popup | parent
+interaction: page | modal | dropdown-parent
 language
 duration
 schedule
 price
-CTA
+tax_behavior
+cta
+contact_channel
 ```
 
-Do not scatter current prices/schedules across multiple renderers. Keep the existing global tax-note behavior and avoid duplicate tax notes.
+Do **not** move full long-form page copy into one giant config. Only centralize repeated factual fields.
 
-### P0 — Homepage patch, not rebuild
-
-Use current `Homepage v2` as baseline.
-
-Only change:
-- replace requested hero/section photos with approved Media Library assets;
-- Eling Sanctuary cards: **3 → 4**, add Corporate Service;
-- Academy cards:
-  - Yoga Teacher Training
-  - Eling Meditation Course
-  - Eling Sound Healing Course
-- keep Pasraman, Voices of Transformation, Eling Pedia and Contact/Gateway structure unchanged;
-- replace FAQ with the approved 2026 set from DOCX;
-- remove Atma Retreat FAQ;
-- revise footer copy + Explore + Programs lists exactly from DOCX.
-
-**FAQ cancellation policy:** DOCX still contains `[X hari]`. Do not ship placeholder text. Omit FAQ #7 until official policy is supplied, or populate only after confirmation.
-
-### P0 — Promote homepage with zero DB churn
-
-Current front page already contains `[bes_home_content]`.
-
-After v2 QA, make `[bes_home_content]` resolve to the approved production v2 renderer (or a thin wrapper around it). Keep `[bes_home_content_v2]` temporarily as preview alias.
-
-Result: no front-page rebuild and no mass WP page edit. Rollback is only renderer registration reversal.
-
-Remove/disable production dependence on `?preview-v2=true` and the v2 preview menu DOM-replacement logic once the real global header is updated.
+Benefits:
+- one schedule/price edit updates every surface;
+- homepage card and detail modal cannot drift;
+- language and CTA routing are testable;
+- tax note is rendered once rather than copied manually everywhere.
 
 ---
 
-## 5. Sanctuary implementation
+## 6. Homepage — strict delta patch
 
-### `/sanctuary/` — existing `[bes_sanctuary_hub]`
-Refactor from “three retreat depths” into a four-category gateway:
+`Homepage v2` is the baseline. Do not rebuild it.
+
+### Keep unchanged
+
+- Hero structure/copy.
+- Core Values structure/copy.
+- Pasraman section structure.
+- Voices of Transformation.
+- Eling Pedia.
+- Contact/Gateway.
+
+### Change only
+
+1. Sanctuary cards → exactly 4:
+   - Healing & Therapy
+   - Retreats
+   - Tapa Brata
+   - Corporate Service
+2. Academy cards → exactly 3:
+   - Yoga Teacher Training
+   - Eling Meditation Course
+   - Eling Sound Healing Course
+3. Replace FAQ with current 2026 set; remove Atma Retreat.
+4. Footer copy/navigation per DOCX.
+5. Replace photos only where Canva explicitly marks photo replacement **and an approved Media Library asset can be mapped**. Do not alter otherwise-approved hero/layout to chase an image note blindly.
+
+### Production promotion
+
+After QA:
+- keep WP front page unchanged;
+- make `[bes_home_content]` resolve to approved v2 production renderer;
+- keep `[bes_home_content_v2]` temporarily as preview alias;
+- remove dependency on `?preview-v2=true` and client-side menu replacement only after Menu 48 is live and verified.
+
+Rollback = restore old `[bes_home_content]` registration; no DB/page rebuild required.
+
+---
+
+## 7. Sanctuary execution
+
+### `/sanctuary/` — reuse `[bes_sanctuary_hub]`
+
+Replace the old “3 depths” catalog with four category cards:
 1. Healing & Therapy
 2. Retreats
 3. Tapa Brata
 4. Corporate Service
 
-Reuse existing BES styling/component language; do not redesign from zero.
+Keep existing BES design tokens/components. This is a content/IA refactor, not a new visual system.
 
-### `/healing-therapy/` — new `[bes_healing_therapy]`
-Use DOCX copy and Canva layout.
+### Healing & Therapy — new `[bes_healing_therapy]`
 
-Atomic cards open a reusable modal:
+Dedicated landing, matching Canva/DOCX section order.
+
+Modal services:
 - Healing Retreat
 - Sacred Morning Awakening
 - Mother Earth Purifications
 - Eling Sound Awakening
 
-`Personal Session with Yogi` is **not** a modal; navigate to its dedicated page.
+`Personal Session with Yogi` navigates to a dedicated landing page; it is not a modal.
 
-Existing standalone URLs for old atomic programs should remain valid during rollout. Do not delete them simply because the new UX uses a modal.
+Existing standalone legacy service URLs stay valid during rollout.
 
-### Personal Session with Yogi
-Reuse the existing published Personal Eling Session WP page instead of creating a duplicate route. Replace its content with a shortcode wrapper, e.g. `[bes_personal_session_yogi]`.
+### Personal Session with Yogi — dedicated renderer
 
-Child sessions use the same reusable modal component:
+Reuse an existing suitable published route rather than creating a duplicate if baseline confirms one.
+
+Child modal sessions:
 - Ruang Jiwa / Spiritual Counseling
 - Sound Chakra Healing
 - 7 Chakra Crystal Healing
 - Eling Therapy
 
-Do not confuse **7 Chakra Crystal Healing** with Pasraman **Pelukatan / 7 Chakra Water Purification**.
+Teacher/Yogi profile section must reuse verified profile data. If no approved profile data exists, do not fabricate profiles.
 
-### Eling Sanctuary Retreat
-Keep existing route + `[bes_eling_sanctuary_retreat]`; replace copy/content to the approved 2D1N / 3D2N experience.
+### Retreats
 
-No separate `Retreats` WP landing is needed while only one retreat is in the approved catalog.
+Keep existing Eling Sanctuary Retreat route + shortcode. Replace content with approved 2D1N / 3D2N experience.
+
+No separate generic Retreats page is required while only one retreat is approved.
 
 ### Tapa Brata
-Reuse the active shortcode implementation and update to approved 4D3N copy. Multiple historical Tapa Brata URLs exist; do not delete/redirect during content implementation. Canonical/301 cleanup is a post-QA SEO task.
 
-### Corporate Services
-Create one dedicated page + shortcode, e.g. `[bes_corporate_services]`, using the supplied corporate copy and Canva structure.
+Patch active shortcode/route to approved 4D3N experience. Do not delete duplicate historical pages in this task.
+
+### Corporate Service
+
+Add one dedicated page + shortcode using supplied Canva/DOCX structure.
 
 ---
 
-## 6. Academy implementation
+## 8. Academy execution
 
-### Yoga Teacher Training — existing `[bes_yoga_teacher_training]`
-Do not preserve the current long-form curriculum structure just because code already exists. Keep reusable visual components/tokens, but rebuild the page data/section order from DOCX.
+### YTT — preserve `[bes_yoga_teacher_training]`
 
-Approved catalog:
+Reuse existing v3 UI components; replace the catalog/data architecture with:
+
 - 50H Hybrid
 - 50H Offline
-- **100H Offline — new**
+- 100H Offline / Residential **NEW**
 - 200H Hybrid
 - 200H Offline
 - 300H Offline
 
-Reuse current 50H/200H/300H landing routes/shortcodes where they already exist. Add a 100H detail page only because it is a real new catalog item.
+Reuse existing 50H/200H/300H detail pages and shortcode contracts where they already exist. Add only the missing 100H detail surface.
 
-Remove Workshop/YACEP from primary Academy navigation; preserve the old route until later cleanup.
+Workshop/YACEP is removed from primary Academy navigation but its old URL is not deleted during rollout.
 
-### Eling Meditation Course — existing `[bes_meditation_course]`
-Rewrite around:
-- Stage 1 Foundation
-- Stage 2 Deepening
-- Stage 3 Transformation
+### Meditation — preserve `[bes_meditation_course]`
+
+One landing page with:
+- Stage 1 — Foundation
+- Stage 2 — Deepening
+- Stage 3 — Transformation
 - Complete Journey
 
-No separate WP page per stage is required unless a later checkout/SEO requirement appears. Cards can remain within the course landing.
+Do not create four new WP pages unless checkout/SEO later requires them.
 
 ### Eling Sound Healing Course
-Create a dedicated page + shortcode, e.g. `[bes_sound_healing_course]`, using DOCX sections and existing BES design language.
+
+Add one dedicated page + shortcode, reusing BES components. No new design framework.
 
 ---
 
-## 7. Pasraman
+## 9. Pasraman
 
-Convert existing `/pasraman/` from raw article content to a shortcode-driven page, e.g. `[bes_pasraman]`.
+Keep `/pasraman/`; replace raw long-form body with a BES shortcode renderer.
 
-Implement only programs with supplied approved copy:
+Implement only approved supplied programs:
 - Pelukatan / 7 Chakra Water Purification
 - Eling Sadhana
 - Eling Usada Retreat
 - Eling Bhakti Yoga
 
-The sitemap image also mentions `Program Komunitas`, but DOCX does not provide a complete approved content block. Do not invent it; add when copy is supplied.
+`Program Komunitas` appears in the sitemap but has no complete approved copy. **DEFER — do not invent content.**
 
 ---
 
-## 8. Footer
+## 10. One modal engine only
 
-Update existing global footer only.
+Build one reusable program-detail modal; cards supply data.
 
-### Explore
-- Home
-- About Us
-- Sanctuary
-- Academy
-- Pasraman
-- Partnership
-- Wisdom
-
-### Programs
-- Healing & Therapy
-- Retreats
-- Tapa Brata
-- Corporate Service
-- Yoga Teacher Training
-- Eling Meditation Course
-- Eling Sound Healing Course
-
-Remove obsolete generic links `Online Course`, `Workshop`, and duplicate `Sanctuary` from Programs.
-
-Use approved footer sentence from DOCX. `Get in Touch` stays unchanged.
-
----
-
-## 9. Reusable modal requirement
-
-Build **one** modal implementation for program details; feed it catalog/content data.
-
-Minimum behavior:
+Required behavior:
 - open from card;
-- close button + backdrop + `Esc`;
-- focus return to triggering card;
+- close via button, backdrop and `Esc`;
+- focus trap + focus return;
 - body scroll lock;
 - accessible title/ARIA;
-- mobile-safe height with internal scroll;
-- CTA to existing WhatsApp/booking flow;
-- no duplicated modal JS per card.
+- mobile-safe internal scrolling;
+- CTA uses explicit contact/booking channel;
+- one JS controller, not copied JS per modal/card.
 
-Do not use a modal for category parents or long-form pages.
-
----
-
-## 10. Explicit non-goals for this task
-
-- No WooCommerce source migration/rewrite.
-- No MasterStudy source migration/rewrite.
-- No LMS/account redesign.
-- No full Elementor cleanup.
-- No deletion of legacy pages during content rollout.
-- No mass permalink change.
-- No migration of all WPCodeBox snippets as a prerequisite.
-- No new copy generated by developer/AI where DOCX is silent.
+Do not use modals for category parents or long-form experiences.
 
 ---
 
-## 11. Acceptance criteria
+## 11. Data gates discovered by cross-audit
 
-- [ ] Revised pages match Canva hierarchy and use DOCX copy without silent rewriting.
-- [ ] Homepage production path works without `?preview-v2=true`.
-- [ ] Existing front page shortcode contract remains valid.
-- [ ] Sanctuary and Academy dropdowns work on desktop + mobile + keyboard.
-- [ ] Homepage Sanctuary has 4 cards; Academy has exactly 3 approved cards.
-- [ ] Healing & Therapy atomic services use one modal engine.
-- [ ] Personal Session with Yogi is a dedicated page with 4 modal services.
-- [ ] YTT catalog includes 50H/100H/200H/300H as specified.
-- [ ] Meditation Course has 3 stages + Complete Journey.
-- [ ] Pasraman contains only approved supplied programs.
-- [ ] Footer navigation matches approved lists.
-- [ ] No `[X hari]`, lorem ipsum, dead `#` CTA, old “Wellness Training”, or “Workshop YACEP” remains in revised surfaces.
-- [ ] No touched revised surface hotlinks Unsplash/demo assets.
-- [ ] No duplicate shortcode/function registration between plugin and WPCodeBox.
-- [ ] No PHP warning/fatal or browser console error on revised pages.
-- [ ] Existing WooCommerce, MasterStudy, login/account and course flows remain unchanged.
-- [ ] Existing old URLs remain 200 or have an explicitly reviewed redirect; zero accidental 404s.
-- [ ] Mobile QA at ~390px and desktop QA at ~1366/1440px completed against Canva.
+These must be resolved without blocking unrelated implementation.
+
+### GATE A — Healing Retreat duration vs schedule
+
+Brief says:
+- Duration: **5 Hours**
+- Schedule: **08.00–14.00**
+
+That clock range is 6 hours. Current baseline previously uses a 5-hour window. **Do not silently choose one.** Build with a single config value and hold final publish of this field until confirmed.
+
+### GATE B — 50H Hybrid language
+
+Cross-source mismatch:
+- Canva sitemap + FAQ indicate **Hybrid = Bahasa Indonesia**.
+- YTT program copy block says `Bahasa Indonesia / English` for 50H.
+
+Working interpretation: Hybrid should follow the sitemap/FAQ and be Bahasa Indonesia, but mark for final content confirmation before production.
+
+### GATE C — FAQ cancellation policy
+
+FAQ #7 still contains `[X hari]`.
+
+- Never publish placeholder.
+- Hide/omit that FAQ until official policy is supplied.
+
+### GATE D — WhatsApp/contact routing
+
+Existing snippets contain more than one WhatsApp number/channel. The brief specifies WhatsApp CTAs but does not resolve which number owns each journey.
+
+- Do not normalize all numbers blindly.
+- Centralize contact routing as named channels (`general`, `sanctuary`, `academy`, etc.) only after ownership is confirmed.
+- Until then preserve existing verified route-specific contact behavior.
+
+### GATE E — Program Komunitas
+
+Sitemap contains it; DOCX lacks complete content. Defer.
+
+These are **field-level gates**, not reasons to delay the rest of development.
 
 ---
 
-## 12. Recommended development order
+## 12. Iteration engine — mandatory development loop
+
+Every surface is implemented with the same short loop:
 
 ```text
-1. BES snippet plugin loader
-2. Shared catalog + modal
-3. Global header/footer dropdown patch
-4. Homepage v2 delta patch → promote behind [bes_home_content]
-5. Sanctuary hub
-6. Healing & Therapy + Personal Session
-7. Retreat / Tapa Brata / Corporate Services
-8. YTT + Meditation + Sound Healing Course
-9. Pasraman
-10. Cross-route QA + only then legacy/canonical cleanup
+1. BASELINE
+   capture route + shortcode + screenshot + current CTA/dependencies
+
+2. CLASSIFY
+   KEEP | PATCH | ADAPT | NEW | DEFER
+
+3. MINIMUM DELTA
+   change only the requirement mapped to that surface
+
+4. CONTRACT TEST
+   shortcode, route, hooks, assets, CTA, no duplicate registration
+
+5. VISUAL/CONTENT TEST
+   Canva hierarchy + DOCX copy/data
+
+6. REGRESSION TEST
+   header/footer/mobile + unaffected vendor flows where relevant
+
+7. FREEZE
+   mark batch passed before touching the next area
 ```
 
-**Definition of done:** client-approved information architecture and copy are live using the existing BES design/runtime foundation, with the smallest practical number of new pages/renderers and without coupling the rollout to a full WPCodeBox or vendor-plugin migration.
+If a requirement causes an unrelated surface to change, **stop and reassess** before adding another workaround.
+
+### Stop conditions
+
+Do not continue stacking fixes when any of these occurs:
+- duplicate function/shortcode fatal;
+- a new global CSS rule is needed only to repair a local page;
+- a page requires editing vendor plugin source;
+- route change causes unexplained 404/redirect chain;
+- implementation requires maintaining both old and new menu engines;
+- one data fact has different values on two revised surfaces;
+- fix requires modifying an unrelated LMS/Woo/account surface.
+
+Resolve root cause or revert the current batch first.
+
+---
+
+## 13. Batch plan + gates
+
+### Batch A — plugin foundation + global runtime
+
+**Do:** loader, module ledger, shared catalog/contact config, migrate Global Assets 1:1.  
+**Then:** update Menu 48 hierarchy and fallback data.
+
+**Pass when:** header/footer are visually unchanged except approved nav/footer delta; mobile dropdown works; no duplicate hooks.
+
+### Batch B — homepage
+
+**Do:** patch only approved v2 deltas; promote through `[bes_home_content]` after preview QA.
+
+**Pass when:** `/` uses approved layout without preview query flag; old homepage can be restored by registration rollback.
+
+### Batch C — Sanctuary
+
+**Do:** hub → Healing & Therapy → Personal Session → Retreat/Tapa → Corporate.
+
+**Pass when:** all category routes/CTAs resolve, modal engine is shared, no old route accidentally disappears.
+
+### Batch D — Academy
+
+**Do:** YTT catalog → 100H addition → Meditation → Sound Healing Course.
+
+**Pass when:** all catalog labels/languages/prices/routes match approved data and old YTT routes remain valid.
+
+### Batch E — Pasraman
+
+**Do:** convert existing page to shortcode renderer using only supplied programs.
+
+**Pass when:** no Program Komunitas content is invented and existing `/pasraman/` route remains unchanged.
+
+### Batch F — production cross-regression
+
+**Do:** purge page/cache layer after cutover; route crawl; desktop/mobile visual compare; check error logs/console.
+
+**Pass when:** no accidental 404, no duplicate registration, no vendor-flow regression.
+
+---
+
+## 14. QA matrix
+
+### Runtime
+
+- [ ] PHP lint passes for every plugin file.
+- [ ] No duplicate shortcode/function/hook registration.
+- [ ] No PHP warnings/notices/fatals on revised routes.
+- [ ] No browser console errors.
+- [ ] Cache purge performed after menu/renderer cutover.
+
+### Contracts
+
+- [ ] Existing route retained whenever marked PATCH/ADAPT.
+- [ ] Existing shortcode names retained whenever a contract exists.
+- [ ] Old URLs remain 200 or have an explicitly reviewed redirect.
+- [ ] WooCommerce, MasterStudy, login/account/course flows remain unchanged.
+
+### Content/data
+
+- [ ] DOCX copy not silently rewritten.
+- [ ] One canonical price/schedule/language value per program.
+- [ ] No `[X hari]` or other placeholders.
+- [ ] No obsolete `Wellness Training` / `Workshop YACEP` on revised primary surfaces.
+- [ ] No Atma Retreat FAQ.
+- [ ] No invented Program Komunitas or Yogi profile content.
+- [ ] Tax note appears once per applicable price, not duplicated.
+
+### Navigation
+
+- [ ] Menu 48 is the production source.
+- [ ] Sanctuary dropdown has exactly 4 children.
+- [ ] Academy dropdown has exactly 3 children.
+- [ ] Structural Academy parent is not a dead CTA.
+- [ ] Desktop hover/focus and mobile expand/collapse work.
+
+### Visual
+
+Canva references are 1366px wide, so use 1366/1440 desktop as the primary visual baseline.
+
+- [ ] Desktop ~1366/1440px checked section-by-section.
+- [ ] Mobile ~390px checked.
+- [ ] Cards, corner radii, shadows, spacing and image treatment remain within existing BES v3 language.
+- [ ] Touched surfaces use approved/owned Media Library assets rather than Unsplash/demo hotlinks.
+
+### CTA
+
+- [ ] Every CTA resolves to a real route/modal/contact action.
+- [ ] No dead `#` user-action CTA.
+- [ ] Booking/contact number is intentionally mapped, not copied accidentally from another program.
+
+---
+
+## 15. Rollback model
+
+Rollback must remain local to the latest batch.
+
+- Plugin module fails → disable that module and restore its WPCodeBox counterpart.
+- Homepage fails → restore old `[bes_home_content]` registration.
+- Menu fails → restore previous Menu 48 hierarchy; no renderer rewrite required.
+- New page fails → remove from nav; existing routes remain untouched.
+- Data conflict → hide only the unresolved field/FAQ/CTA, not the whole page.
+
+Do not use database-wide restore as the normal rollback mechanism.
+
+---
+
+## 16. Definition of done
+
+The task is complete when the approved 2026 IA/copy is live using the existing BES runtime/design foundation with:
+
+- the smallest practical number of new pages;
+- existing shortcode/route contracts preserved;
+- one shared modal engine;
+- one source for repeated program facts;
+- Menu 48 as the real navigation source;
+- touched WPCodeBox snippets migrated incrementally to the BES plugin;
+- unrelated vendor/LMS/Woo/account code untouched;
+- unresolved brief contradictions explicitly gated rather than guessed;
+- each implementation batch independently reversible.
+
+**Development principle:** if a change does not directly close a documented current-vs-expected gap, it is out of scope for this rollout.
