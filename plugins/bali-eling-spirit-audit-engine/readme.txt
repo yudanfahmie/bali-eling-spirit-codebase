@@ -1,7 +1,7 @@
 === Bali Eling Spirit Audit Engine ===
 Requires at least: 6.0
 Requires PHP: 8.0
-Stable tag: 0.2.0
+Stable tag: 0.2.1
 
 Developer-only current-state audit engine for the Bali Eling Spirit WordPress refactor.
 
@@ -30,6 +30,7 @@ Developer-only current-state audit engine for the Bali Eling Spirit WordPress re
 * Stale temporary audit folders older than 6 hours are removed automatically.
 * ZIP creation is verified and automatically falls back to JSON if ZIP creation is unavailable or fails.
 * Temporary audit storage gets index/.htaccess guards where supported.
+* Download URLs are normalized client-side and server-side to tolerate HTML-escaped query separators from wp_nonce_url/security layers.
 
 == Safety ==
 The plugin is export-only and does not mutate pages, menus, snippets, orders, customers or LMS data. It does not export database credentials, WordPress auth salts, users, sessions or WooCommerce order/customer records. Secret-like WPCodeBox columns are omitted. Snippet source itself is preserved when migration code is enabled, because modifying code could break parity. Temporary files are removed after successful download.
