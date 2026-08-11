@@ -1,9 +1,6 @@
 ---
 deployment:
   tasks:
-    # Canonical deployment target for the BES production plugin.
-    # If this WordPress install uses a non-standard document root, deployment
-    # must update only this path; repository/plugin paths remain unchanged.
-    - export DEPLOYPATH="$HOME/public_html/wp-content/plugins/bali-eling-spirit-site-core"
-    - /bin/mkdir -p "$DEPLOYPATH"
-    - /bin/cp -R plugin/bali-eling-spirit-site-core/. "$DEPLOYPATH/"
+    - export DEPLOYPATH=/home/markascl/balielingspirit.com/wp-content/plugins/bali-eling-spirit-site-core/
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp -R plugin/bali-eling-spirit-site-core/. $DEPLOYPATH
