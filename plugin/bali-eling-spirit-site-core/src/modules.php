@@ -50,4 +50,49 @@ return array(
         'file'         => 'sanctuary/corporate-services.php',
         'legacy_owner' => 'NEW — no canonical WPCodeBox renderer owner',
     ),
+    'academy-ytt' => array(
+        'state'        => 'PLUGIN_SHADOW',
+        'file'         => 'academy/yoga-teacher-training.php',
+        'legacy_owner' => 'WPCodeBox — Yoga Teacher Training [bes_yoga_teacher_training]',
+    ),
+    'academy-ytt-50h' => array(
+        'state'        => 'PLUGIN_SHADOW',
+        'file'         => 'academy/baseline/ytt-50h.php',
+        'legacy_owner' => 'WPCodeBox — YTT 50H [bes_ytt_50h_landing]',
+    ),
+    'academy-ytt-50h-hybrid' => array(
+        'state'        => 'PLUGIN_SHADOW',
+        'file'         => 'academy/ytt-50h-hybrid.php',
+        'legacy_owner' => 'WPCodeBox — YTT 50H Hybrid [bes_ytt_50h_hybrid_landing]',
+    ),
+    'academy-ytt-100h' => array(
+        'state'        => 'PLUGIN_SHADOW',
+        'file'         => 'academy/ytt-100h.php',
+        'legacy_owner' => 'NEW — no canonical WPCodeBox 100H renderer owner',
+    ),
+    'academy-ytt-200h-hybrid' => array(
+        'state'        => 'PLUGIN_SHADOW',
+        'file'         => 'academy/baseline/ytt-200h-hybrid.php',
+        'legacy_owner' => 'WPCodeBox — YTT 200H Hybrid [bes_ytt_200h_hybrid_landing]',
+    ),
+    'academy-ytt-200h' => array(
+        'state'        => 'PLUGIN_SHADOW',
+        'file'         => 'academy/baseline/ytt-200h.php',
+        'legacy_owner' => 'WPCodeBox — YTT 200H [bes_ytt_200h_landing]',
+    ),
+    'academy-ytt-300h' => array(
+        'state'        => 'PLUGIN_SHADOW',
+        'file'         => 'academy/baseline/ytt-300h.php',
+        'legacy_owner' => 'WPCodeBox — 300 Hour Yoga Teacher Training [bes_300h_ytt]',
+    ),
+    'academy-meditation' => array(
+        'state'        => 'PLUGIN_SHADOW',
+        'file'         => 'academy/meditation-course.php',
+        'legacy_owner' => 'WPCodeBox — Eling Meditation Course [bes_meditation_course]',
+    ),
+    'academy-sound-healing' => array(
+        'state'        => 'PLUGIN_SHADOW',
+        'file'         => 'academy/sound-healing-course.php',
+        'legacy_owner' => 'NEW — no canonical WPCodeBox Eling Sound Healing Course owner',
+    ),
 );
