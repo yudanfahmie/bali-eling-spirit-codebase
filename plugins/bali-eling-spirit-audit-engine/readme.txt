@@ -1,6 +1,6 @@
 === Bali Eling Spirit Audit Engine ===
 Requires at least: 6.0
-Requires PHP: 7.4
+Requires PHP: 8.0
 Stable tag: 0.1.0
 
 Developer-only current-state audit engine for the Bali Eling Spirit WordPress refactor.
