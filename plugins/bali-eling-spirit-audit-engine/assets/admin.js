@@ -73,6 +73,25 @@
     } catch (_) { /* best effort: never block developer flow */ }
   }
 
+  function normalizeDownloadUrl(value) {
+    let url = String(value || '').trim();
+    if (!url) return '#';
+
+    // wp_nonce_url() returns an HTML-escaped URL. Decode defensively because
+    // JSON + DOM/security layers can preserve or double-encode the entities.
+    const decoder = document.createElement('textarea');
+    for (let i = 0; i < 3; i += 1) {
+      decoder.innerHTML = url;
+      const decoded = decoder.value;
+      if (decoded === url) break;
+      url = decoded;
+    }
+
+    // Last-resort normalization for malformed query separators such as
+    // ?action=...&amp;audit_id=... reaching the browser literally.
+    return url.replace(/([?&])(?:(?:amp|#038|038);)+/gi, '$1');
+  }
+
   function renderDownload(data) {
     result.hidden = false;
     result.replaceChildren();
@@ -84,7 +103,7 @@
     small.textContent = includeCode.checked ? 'Migration-ready snapshot' : 'Structural-only snapshot';
     meta.append(strong, small);
     link.className = 'button button-primary';
-    link.href = data.downloadUrl || '#';
+    link.href = normalizeDownloadUrl(data.downloadUrl);
     link.textContent = 'Download bundle';
     result.append(meta, link);
   }
