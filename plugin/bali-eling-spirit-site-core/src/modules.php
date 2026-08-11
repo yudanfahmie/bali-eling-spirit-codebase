@@ -15,4 +15,9 @@ return array(
         'file'         => 'global/global-assets.php',
         'legacy_owner' => 'WPCodeBox #24 — Global Assets (Preloader, Header, Footer)',
     ),
+    'homepage' => array(
+        'state'        => 'PLUGIN_SHADOW',
+        'file'         => 'homepage/homepage.php',
+        'legacy_owner' => 'WPCodeBox — Homepage / Homepage v2',
+    ),
 );
