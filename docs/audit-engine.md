@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The refactor starts by making the existing WordPress implementation observable. Bali Eling Spirit currently combines WordPress pages and menus, WooCommerce, an LMS, creative pages rendered through shortcodes, and renderer logic stored in WPCodeBox. The audit plugin captures those relationships before hierarchy or rendering behavior is changed.
+The refactor starts by making the existing WordPress implementation observable. Bali Eling Spirit currently combines WordPress pages and menus, WooCommerce, an LMS, creative pages rendered through shortcodes, and renderer/custom behavior stored in WPCodeBox. The audit plugin captures those relationships before hierarchy or rendering behavior is changed.
 
 ## Bundle layout
 
@@ -24,15 +24,13 @@ The engine uses the current WordPress table prefix and checks for:
 - `{prefix}wpcb_snippets`
 - `{prefix}wpcb_folders`
 
-The table schema is discovered at runtime rather than assuming specific columns. This is important because the audit should survive WPCodeBox schema changes.
-
-With migration mode enabled, code-like fields are exported intact. With migration mode disabled, code-like values are replaced by their length and SHA-256 hash. Columns whose names look like passwords, tokens, secrets, licenses or private/API keys are omitted.
+The table schema is discovered at runtime rather than assuming specific columns. With migration mode enabled, code-like fields are exported intact. With migration mode disabled, code-like values are replaced by their length and SHA-256 hash. Columns whose names look like passwords, tokens, secrets, licenses or private/API keys are omitted.
 
 ## UX / execution model
 
-The admin experience is intentionally developer-first: one page, one primary action and one optional migration-code checkbox. The audit is executed as small sequential AJAX phases so the process avoids one long blocking request. A 3px progress bar advances through the real phases and each phase writes a JSON fragment to temporary server storage.
+The admin experience is intentionally developer-first: one page, one primary action and one optional migration-code checkbox. The audit executes as small sequential AJAX phases instead of one long blocking request.
 
-The final step packages all fragments into ZIP when `ZipArchive` is available, otherwise into one JSON file. The temporary audit directory is deleted immediately after download. If an AJAX phase fails, cleanup is attempted without adding another confirmation step.
+The final step packages all fragments into ZIP when `ZipArchive` is available, otherwise into one JSON file. Generated bundles remain repeat-downloadable for up to two hours and stale audit bundles are cleaned opportunistically after expiry.
 
 ## Data intentionally not captured
 
@@ -44,33 +42,31 @@ The final step packages all fragments into ZIP when `ZipArchive` is available, o
 
 ## Recommended migration sequence
 
-1. Install and run this audit engine on the current site or staging clone.
-2. Keep the resulting audit bundle outside this public repository unless the repository is made private.
-3. Use `07-relationships.json` as the current information-architecture graph.
-4. Map the incoming Canva client brief against that graph.
-5. Classify WPCodeBox snippets into renderer/shortcode, PHP service, hook, asset, integration and obsolete code.
-6. Move active behavior into a first-party Bali Eling Spirit plugin under version control.
-7. Preserve shortcode names initially to keep current pages functional while implementation moves out of WPCodeBox.
-8. Refactor shortcode APIs/page hierarchy only after behavior parity is verified.
-9. Remove the WPCodeBox runtime dependency after the new plugin owns all required behavior.
+1. Run the audit engine on the current site/staging clone.
+2. Treat the audit as runtime baseline and `docs/old-snippet-implementation-wpcodebox/` as implementation baseline.
+3. Cross-map Canva/DOCX expectation against the actual page → shortcode → snippet graph.
+4. Reverse-engineer shortcode, hook, global-asset and cross-snippet dependencies before moving code.
+5. Classify every relevant snippet as KEEP, PATCH/ADAPT, MIGRATE NOW, DEPENDENCY, LEGACY, PREVIEW ONLY or DEFER.
+6. Move only validated BES custom behavior into the canonical site-core plugin.
+7. Preserve existing shortcode/route contracts during initial migration.
+8. Disable a WPCodeBox counterpart only after its plugin replacement is ready and validated.
+9. Refactor internals only after parity and client-facing revision are stable.
 
-## Target plugin architecture after audit
+## Canonical production plugin architecture
 
-A sensible first-party plugin can evolve toward:
+Deployment requires this repository path:
 
 ```text
-bali-eling-spirit-core/
-  bali-eling-spirit-core.php
-  src/
-    Shortcodes/
-    Renderers/
-    LMS/
-    WooCommerce/
-    Integrations/
-    Assets/
-    Support/
-  assets/
-  templates/
+plugin/
+  bali-eling-spirit-site-core/
+    bali-eling-spirit-site-core.php
+    assets/
+    src/
+    templates/
 ```
 
-The first migration milestone should be behavioral parity, not aesthetic cleanup. Once snippets are version-controlled modules, the renderer can then be refactored safely alongside the new hierarchy and Canva design flow.
+The site-core plugin is the runtime home for **BES custom snippets migrated from WPCodeBox**. It is not a copy or replacement of WooCommerce, MasterStudy, Elementor, or other vendor plugins. A BES snippet may hook those vendors, but vendor source remains external.
+
+The existing `plugins/bali-eling-spirit-audit-engine/` folder remains separate developer tooling and is not part of the cPanel site-core deployment payload.
+
+The first migration milestone is behavioral parity and precise client-delta implementation, not broad architectural cleanup.
