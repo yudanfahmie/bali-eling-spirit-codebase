@@ -3,7 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! defined( 'BES_SITE_CORE_STRUCTURE_VERSION' ) ) {
-    define( 'BES_SITE_CORE_STRUCTURE_VERSION', 1 );
+    define( 'BES_SITE_CORE_STRUCTURE_VERSION', 2 );
 }
 
 function bes_site_core_structure_pages() {
@@ -127,11 +127,13 @@ function bes_site_core_sync_menu_48( $page_ids ) {
     if ( ! $menu ) { $out['status']='missing-menu'; $out['warnings'][]='Menu ID 48 was not found.'; return $out; }
     $items = wp_get_nav_menu_items(48,array('post_status'=>'any')); if ( ! is_array($items) ) $items=array();
     $ids = array();
+    $position = 1;
     foreach ( bes_site_core_structure_menu() as $spec ) {
         $url = ! empty($spec['structural']) ? '' : bes_site_core_page_url_from_contract($spec,$page_ids);
         $parent = ! empty($spec['parent']) && ! empty($ids[$spec['parent']]) ? $ids[$spec['parent']] : 0;
         $existing = bes_site_core_find_menu_item($items,$spec,$page_ids,$url);
-        $args = array('menu-item-title'=>$spec['title'],'menu-item-status'=>'publish','menu-item-parent-id'=>$parent);
+        $args = array('menu-item-title'=>$spec['title'],'menu-item-status'=>'publish','menu-item-parent-id'=>$parent,'menu-item-position'=>$position);
+        $position++;
         if ( ! empty($spec['structural']) ) {
             $args += array('menu-item-type'=>'custom','menu-item-url'=>'','menu-item-classes'=>'bes-menu-structural-parent');
         } elseif ( ! empty($spec['page']) && ! empty($page_ids[$spec['page']]) ) {
