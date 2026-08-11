@@ -5,7 +5,7 @@
  * Version: 0.1.0
  * Author: Bali Eling Spirit Engineering
  * Requires at least: 6.0
- * Requires PHP: 7.4
+ * Requires PHP: 8.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
