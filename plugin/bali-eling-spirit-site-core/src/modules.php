@@ -1,18 +1,19 @@
 <?php
 /**
  * Site Core module ownership manifest.
- *
  * Runtime modules are fail-closed: only PLUGIN_LIVE and WPBOX_OFF entries may load.
  */
-
-if ( ! defined( 'ABSPATH' ) ) {
-    exit;
-}
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 return array(
+    'program-facts' => array(
+        'state'        => 'PLUGIN_LIVE',
+        'file'         => 'config/program-facts.php',
+        'legacy_owner' => 'SITE CORE — shared canonical program/contact facts',
+    ),
     'global-assets' => array(
         'state'        => 'PLUGIN_SHADOW',
-        'file'         => 'global/global-assets.php',
+        'file'         => 'global/global-assets-fallback.php',
         'legacy_owner' => 'WPCodeBox #24 — Global Assets (Preloader, Header, Footer)',
     ),
     'homepage' => array(
@@ -33,7 +34,7 @@ return array(
     'sanctuary-personal-session-yogi' => array(
         'state'        => 'PLUGIN_LIVE',
         'file'         => 'sanctuary/personal-session-yogi.php',
-        'legacy_owner' => 'ADAPT — existing /eling-guiding/ becomes the canonical Personal Session parent in Phase F',
+        'legacy_owner' => 'ADAPT — existing /eling-guiding/ is the canonical Personal Session parent',
     ),
     'sanctuary-eling-retreat' => array(
         'state'        => 'PLUGIN_LIVE',
@@ -103,6 +104,6 @@ return array(
     'phase-f-routes' => array(
         'state'        => 'PLUGIN_LIVE',
         'file'         => 'integration/phase-f-routes.php',
-        'legacy_owner' => 'PHASE F — final cross-module route reconciliation',
+        'legacy_owner' => 'PHASE F — compatibility aliases after canonical route reconciliation',
     ),
 );
