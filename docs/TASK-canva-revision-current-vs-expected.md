@@ -33,10 +33,10 @@ CURRENT
 WP Page -> BES shortcode -> WPCodeBox snippet -> WordPress/vendor APIs
 
 TARGET
-WP Page -> SAME BES shortcode -> BES Snippet Plugin -> WordPress/vendor APIs
+WP Page -> SAME BES shortcode -> Bali Eling Spirit Site Core -> WordPress/vendor APIs
 ```
 
-The BES plugin is only the version-controlled runtime home for custom code previously stored in WPCodeBox. WooCommerce, MasterStudy, Elementor and other vendor plugins stay vendor-owned and unchanged.
+The site-core plugin is only the version-controlled runtime home for custom code previously stored in WPCodeBox. WooCommerce, MasterStudy, Elementor and other vendor plugins stay vendor-owned and unchanged.
 
 ### Anti-overhaul rules
 
@@ -46,7 +46,7 @@ The BES plugin is only the version-controlled runtime home for custom code previ
 - Do not perform legacy URL cleanup during content rollout.
 - Do not redesign global CSS/design tokens.
 - Do not create a page when a dropdown, existing page, or modal satisfies the brief.
-- Do not duplicate a migrated snippet in plugin + WPCodeBox at the same time.
+- Do not duplicate a migrated snippet in site-core + WPCodeBox at the same time.
 - Do not invent copy, program data, schedules, prices, teachers, policies or contact routing.
 - New code must use the existing BES visual language and shared utilities before adding new CSS/JS.
 
@@ -123,25 +123,25 @@ Also update `BES_NAV_LINKS` only as a safe fallback; Menu 48 remains primary.
 
 ---
 
-## 4. BES snippet plugin — incremental cutover, not big-bang migration
+## 4. Canonical site-core plugin — incremental cutover, not big-bang migration
 
-Create:
+The deployment-owned plugin path is fixed:
 
 ```text
-plugins/bali-eling-spirit-snippets/
-├── bali-eling-spirit-snippets.php
-├── modules.php
-├── config/
-│   ├── programs.php
-│   └── contacts.php
-├── snippets/
+plugin/bali-eling-spirit-site-core/
+├── bali-eling-spirit-site-core.php
+├── assets/
+├── src/
+│   ├── config/
 │   ├── global/
 │   ├── homepage/
 │   ├── sanctuary/
 │   ├── academy/
 │   └── pasraman/
-└── assets/
+└── templates/
 ```
+
+The root `.cpanel.yml` deploys only this directory. The plural `plugins/` directory remains developer tooling/history and must not become a second production site-core path.
 
 ### First migration batch only
 
@@ -162,8 +162,8 @@ Maintain each moved module in one explicit state:
 WPBOX_ONLY -> PLUGIN_SHADOW -> PLUGIN_LIVE -> WPBOX_OFF
 ```
 
-- `PLUGIN_SHADOW`: file exists in repo but is not loaded.
-- `PLUGIN_LIVE`: plugin loads it only after the WPCodeBox counterpart is disabled.
+- `PLUGIN_SHADOW`: source exists under `plugin/bali-eling-spirit-site-core/` but is not loaded.
+- `PLUGIN_LIVE`: site-core loads it only after the WPCodeBox counterpart is disabled.
 - Never allow the same shortcode/function/hook module to be live in both places.
 - Plugin activation must not automatically disable or rewrite WPCodeBox.
 
@@ -449,7 +449,7 @@ Resolve root cause or revert the current batch first.
 
 ### Batch A — plugin foundation + global runtime
 
-**Do:** loader, module ledger, shared catalog/contact config, migrate Global Assets 1:1.  
+**Do:** loader, module ledger, shared catalog/contact config, migrate Global Assets 1:1 into `plugin/bali-eling-spirit-site-core/`.  
 **Then:** update Menu 48 hierarchy and fallback data.
 
 **Pass when:** header/footer are visually unchanged except approved nav/footer delta; mobile dropdown works; no duplicate hooks.
@@ -542,7 +542,7 @@ Canva references are 1366px wide, so use 1366/1440 desktop as the primary visual
 
 Rollback must remain local to the latest batch.
 
-- Plugin module fails → disable that module and restore its WPCodeBox counterpart.
+- Site-core module fails → disable that module and restore its WPCodeBox counterpart.
 - Homepage fails → restore old `[bes_home_content]` registration.
 - Menu fails → restore previous Menu 48 hierarchy; no renderer rewrite required.
 - New page fails → remove from nav; existing routes remain untouched.
@@ -561,7 +561,7 @@ The task is complete when the approved 2026 IA/copy is live using the existing B
 - one shared modal engine;
 - one source for repeated program facts;
 - Menu 48 as the real navigation source;
-- touched WPCodeBox snippets migrated incrementally to the BES plugin;
+- touched WPCodeBox snippets migrated incrementally into `plugin/bali-eling-spirit-site-core/`;
 - unrelated vendor/LMS/Woo/account code untouched;
 - unresolved brief contradictions explicitly gated rather than guessed;
 - each implementation batch independently reversible.
