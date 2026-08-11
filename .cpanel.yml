@@ -1,6 +1,6 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/markascl/balielingspirit.com/wp-content/plugins/bali-eling-spirit-site-core/
+    - export DEPLOYPATH=/home/markascl/bali-eling-spirit-v3/wp-content/plugins/bali-eling-spirit-site-core/
     - /bin/mkdir -p $DEPLOYPATH
     - /bin/cp -R plugin/bali-eling-spirit-site-core/. $DEPLOYPATH
